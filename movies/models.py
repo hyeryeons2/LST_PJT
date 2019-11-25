@@ -23,6 +23,7 @@ class Movie(models.Model):
     review_link = models.CharField(max_length=200)
     preview_link = models.CharField(max_length=200)
     genres = models.CharField(max_length=100)
+    open_dt = models.IntegerField(blank=True, null=True)
     liked_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_movies')
     recommendation = models.ForeignKey(Recommendation, on_delete=models.SET_NULL, blank=True, null=True)
 

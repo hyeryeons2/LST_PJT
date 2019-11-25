@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock title %}
+
+{% block body %}
+<form method="POST">
+  {% csrf_token %}
+  {% comment %} get 할 때 name 으로 받음 {% endcomment %}
+  <input type="text" value="영화 제목" id="movie" name="movie">
+  <button type="submit">검색</button>
+</form>
+
+<form action="" method="POST">
+  {% csrf_token %} 
+  {{ form.as_p }}
+  <button type="submit">등록</button>
+</form>
+{% endblock body %}

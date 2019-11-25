@@ -6,4 +6,7 @@
         "**/requirements{/**,*}.{txt,in}": "pip-requirements"
     },
     "emmet.includeLanguages": {"django-html": "html"},
+    "[django-html]": {
+        "editor.tabSize": 2
+    },
 }

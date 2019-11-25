@@ -1,13 +1,21 @@
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm, PasswordChangeForm, ReadOnlyPasswordHashField
 from django.contrib.auth import get_user_model # 현재 활성화(active)된 user model 을 return 한다. 
 from django import forms
 
 
+class CustomPasswordChangeForm(PasswordChangeForm):
+    pass
+
+
 class CustomUserChangeForm(UserChangeForm):
+    password = ReadOnlyPasswordHashField(
+        label='비밀번호',
+        help_text='<a href=\"password/\">여기서 변경</a>.'
+    )
 
     class Meta:
         model = get_user_model() # accounts.User
-        fields = ['email', 'first_name', 'last_name',]
+        fields = ['nickname', ]
 
 
 # 커스터마이징한 유저모데을 인식하지 못해서 직접 get_user_model 함수로 

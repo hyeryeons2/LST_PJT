@@ -1,9 +1,52 @@
 {% extends 'base.html' %}
 
-{% block title %}
-{% endblock title %}
+{% block title %}Main{% endblock title %}
 
 {% block body %}
-<h1>이야호</h1>
-<a href="{% url 'movies:addmovie' %}">영화 등록</a>
+<nav class="navbar navbar-light bg-light">
+  <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  btn
+  </button>
+  <a class="navbar-brand" href="{% url 'movies:index' %}">
+    <img src="/static/movies/images/peng.jpg" width="30" height="30" class="d-inline-block align-top" alt="peng">
+    HOME
+  </a>
+  <a href="#">전체영화조회</a>
+  <a href="#">추천영화조회</a>
+  <a href="#">영화메이트찾기</a>
+</nav>
+
+<div class="collapse" id="collapseExample">
+  <div class="row justify-content-left">
+    <div class="col-md-2">
+      <div class="container">
+        <div class="card">
+          <div class="card-header">내 정보 보기</div>
+            <div class="card-body">
+                {% comment %} 유저레벨별 캐릭터 img 들어갈 예정 {% endcomment %}
+
+                <p>{{ user.nickname }} 님, 환영띠</p><br>
+                <p>lev.{{ user.level }}</p>
+                <a href="{% url 'accounts:update' %}">내 정보수정</a><br>
+                {% comment %} <form action=" {% url 'accounts:' %}"> {% endcomment %}
+                <a href=" {% url 'accounts:logout' %}  ">로그아웃</a><br>
+                {% comment %} </form> {% endcomment %}
+                <a href=" {% url 'accounts:liguild' %} ">길드가입</a><br>
+                <a href=" {% url 'accounts:liguild' %} ">길드탈퇴</a><br>
+
+                {% comment %} 관리자만 영화등록 ㄱㄴ {% endcomment %}
+                <a href="{% url 'movies:addmovie' %}">영화등록</a><br>
+                <a href=" {% url 'accounts:liguild' %} ">길드목록보기</a><br>
+
+                <a href="{  }"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 {% endblock body %}

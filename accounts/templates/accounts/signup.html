@@ -1,13 +1,26 @@
 {% extends 'base.html' %}
 
-{% block title %}회원가입{% endblock title %}
+{% block title %}SignUp{% endblock title %}
 
 {% block body %}
-<h2>회원 가입 ㄱ?</h2>
-<br>
-<form method="POST">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit" class="btn btn-secondary">회원가입</button>
-</form>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+            <h3>회원가입</h3>
+            </div>
+            <div class="card-body">
+              <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-secondary">회원가입</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock body %}

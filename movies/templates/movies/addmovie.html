@@ -1,19 +1,24 @@
 {% extends 'base.html' %}
 
-{% block title %}
-{% endblock title %}
+{% block title %}AddMovie{% endblock title %}
 
 {% block body %}
-<form method="POST">
+<h2>영화 추가</h2>
+<form method="POST" class="form-inline my-2 my-lg-0">
   {% csrf_token %}
   {% comment %} get 할 때 name 으로 받음 {% endcomment %}
-  <input type="text" value="영화 제목" id="movie" name="movie">
-  <button type="submit">검색</button>
+  <input class="form-control mr-sm-2" type="text" placeholder="영화 제목" id="movie" name="movie">
+  <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">검색</button>
 </form>
-
+<br>
 <form action="" method="POST">
   {% csrf_token %} 
   {{ form.as_p }}
   <button type="submit">등록</button>
 </form>
 {% endblock body %}
+
+{% comment %} 
+ <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    </form> {% endcomment %}

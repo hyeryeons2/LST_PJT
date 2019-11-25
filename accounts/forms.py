@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserChangeForm, UserCreationForm, Password
 from django.contrib.auth import get_user_model # 현재 활성화(active)된 user model 을 return 한다. 
 from django import forms
 from .models import Guild
-
+# from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 class GuildForm(forms.ModelForm):
 
@@ -17,7 +17,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
 
 class CustomUserChangeForm(UserChangeForm):
     password = ReadOnlyPasswordHashField(
-        label='비밀번호',
+        label='Password',
         help_text='<a href=\"password/\">여기서 변경</a>.'
     )
 
@@ -33,7 +33,7 @@ class CustomUserCreationForm(UserCreationForm):
          'password_mismatch':'틀렸어!',
     }
     password1 = forms.CharField(
-        label='비밀번호',
+        label='Password',
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
         strip=False,
         help_text='성공?',

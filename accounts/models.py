@@ -11,10 +11,6 @@ class Guild(models.Model):
 
 
 class User(AbstractUser):
-    # username = models.CharField(max_length=30, unique=True,
-    #     help_text=_()
-    # )
-    # passwrod = 
     nickname = models.CharField(max_length=20)
     age = models.IntegerField(blank=True, null=True)
     followers = models.ManyToManyField(

@@ -1,6 +1,14 @@
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm, PasswordChangeForm, ReadOnlyPasswordHashField
 from django.contrib.auth import get_user_model # 현재 활성화(active)된 user model 을 return 한다. 
 from django import forms
+from .models import Guild
+
+
+class GuildForm(forms.ModelForm):
+
+    class Meta:
+        model = Guild
+        fields = ['name', ]
 
 
 class CustomPasswordChangeForm(PasswordChangeForm):

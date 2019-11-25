@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}로그인{% endblock title %}
+
+
+{% block body %}
+<h2>로그인 ㄱ</h2>
 <form method="POST">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">로그인</button>
-  {% comment %} <input type="submit" value="회원가입"> {% endcomment %}
-  {% comment %} 위와 동일 {% endcomment %}
-</form>
-</body>
-</html>
+  </form>
+{% endblock body %}

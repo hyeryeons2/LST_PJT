@@ -3,9 +3,11 @@
 {% block title %}회원가입{% endblock title %}
 
 {% block body %}
+<h2>회원 가입 ㄱ?</h2>
+<br>
 <form method="POST">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">회원가입</button>
+  <button type="submit" class="btn btn-secondary">회원가입</button>
 </form>
 {% endblock body %}

@@ -4,7 +4,8 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm #, 
 from django.contrib.auth import login as auth_login, logout as auth_logout, update_session_auth_hash 
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from .forms import CustomUserChangeForm, CustomUserCreationForm, CustomPasswordChangeForm
+from .forms import CustomUserChangeForm, CustomUserCreationForm, CustomPasswordChangeForm, GuildForm
+from .models import Guild
 
 
 def index(request):
@@ -86,3 +87,41 @@ def password(request):
         form = CustomPasswordChangeForm(request.user) 
     context = {'form': form}
     return render(request, 'accounts/password.html', context)
+
+
+def liguild(request):
+    guilds = Guild.objects.all()
+    context = {'guilds': guilds}
+    return render(request, 'accounts/liguild.html', context)
+
+
+@login_required
+def mkguild(request):
+    if request.method == 'POST':
+        form = GuildForm(request.POST) 
+        if form.is_valid():
+            guild = form.save(commit=False)
+            # .master 로 해야 master 의 id 에 접근 가능 
+            guild.master = request.user
+            guild.level = 1 
+            guild.save()
+            request.user.group_id = guild.id
+            request.user.save()
+            return redirect('accounts:liguild')
+    else:
+        form = GuildForm()
+    context = {'form': form}
+    return render(request, 'accounts/mkguild.html', context)
+    
+
+def joinguild(request, guild_pk):
+    guild = get_object_or_404(Guild, pk=guild_pk)
+    request.user.group_id = guild_pk
+    request.user.save()
+    return redirect('accounts:liguild')
+
+
+def leaveguild(request):
+    request.user.group_id = None
+    request.user.save()
+    return redirect('accounts:liguild')

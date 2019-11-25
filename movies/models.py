@@ -2,22 +2,29 @@ from django.db import models
 from django.conf import settings
 
 
+class Recommendation(models.Model):
+    title = models.CharField(max_length=50)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    recommend_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
+
+
 class Movie(models.Model):
     title = models.CharField(max_length=50)
     title_en = models.CharField(max_length=100)
-    audience = models.IntegerField()
     poster_url = models.CharField(max_length=140)
     description = models.TextField()
     running_time = models.CharField(max_length=30)
     directors = models.CharField(max_length=100)
     actors = models.CharField(max_length=100)
+    nation = models.CharField(max_length=50, blank=True, null=True)
     watch_grade = models.CharField(max_length=30)
     level = models.IntegerField()
     review_link = models.CharField(max_length=200)
     preview_link = models.CharField(max_length=200)
     genres = models.CharField(max_length=100)
     liked_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_movies')
-    recommend_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
+    recommendation = models.ForeignKey(Recommendation, on_delete=models.SET_NULL, blank=True, null=True)
 
 
 class Review(models.Model):

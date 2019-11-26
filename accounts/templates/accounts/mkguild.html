@@ -1,25 +1,67 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Make Guild</title>
 
-{% block title %}MakeGuild{% endblock title %}
+  {% comment %} bootstrap CDN {% endcomment %}
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-{% block body %}
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">
-            <h3>길드생성</h3>
-            </div>
-            <div class="card-body">
-              <form method="POST">
-                {% csrf_token %}
+  {% comment %} templates {% endcomment %}
+  <link rel="stylesheet" href="../../../static/accounts/css/accounts.css" />
+  <noscript><link rel="stylesheet" href="../../../static/accounts/css/accounts2.css" /></noscript>
+
+</head>
+<body class="is-preload">
+  <!-- Wrapper -->
+    <div id="wrapper">
+
+      <!-- Main -->
+        <section id="main">
+          <header>
+            <span class="avatar"><img src="/static/accounts/images/tmp_pensu.jpg" alt="tmp_img" width="200px" height="auto"/></span>
+            <h1>길드생성</h1>
+            <p>길드를 만들어보세요!</p>
+          </header>
+          <hr />
+          
+       				<form method="post">
+               {% csrf_token %}
+							<div class="fields">
+								<div class="field">
                 {{ form.as_p }}
-                <button type="submit">길드생성</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+								</div>
+							</div>
+							<ul class="actions special">
+              {% comment %} 회원가입은 했는데.. {% endcomment %}
+                <li><button class="button" type="submit">생성ㅇㅇ</a></li>    
+								{% comment %} <li><a href=" {% url 'accounts:mkguild' %} " class="button" type="submit">생성완료</a></li> {% endcomment %}
+                <li><a href=" {% url 'movies:index' %} " class="button">돌아가기</a></li>
+							</ul>
+						</form>
+						<hr />
+        </section>
+
+      <!-- Footer -->
+        <footer id="footer">
+          <ul class="copyright">
+            <li>&copy; SadHacking </li><li>Designed by: Haily Kim </li>
+          </ul>
+        </footer>
+
     </div>
-  </div>
-{% endblock body %}
+
+  <!-- Scripts -->
+    <script>
+      if ('addEventListener' in window) {
+        window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-preload\b/, ''); });
+        document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+      }
+    </script>
+
+</body>
+</html>

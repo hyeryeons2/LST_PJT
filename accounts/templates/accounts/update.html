@@ -1,13 +1,68 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Update User Info</title>
 
-{% block title %}회원정보수정{% endblock title %}
+  {% comment %} bootstrap CDN {% endcomment %}
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-{% block body %}
-<h2>회원정보 수정띠</h2>
-<form method="POST">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">수정ㅇㅇ</button>
-  {% comment %} 취소버튼(movies:index 보여주면 될듯) {% endcomment %}
-</form>
-{% endblock body %}
+  {% comment %} templates {% endcomment %}
+  <link rel="stylesheet" href="../../../static/accounts/css/accounts.css" />
+  <noscript><link rel="stylesheet" href="../../../static/accounts/css/accounts2.css" /></noscript>
+
+</head>
+<body class="is-preload">
+  <!-- Wrapper -->
+    <div id="wrapper">
+
+      <!-- Main -->
+        <section id="main">
+          <header>
+            <span class="avatar"><img src="/static/accounts/images/tmp_pensu.jpg" alt="tmp_img" width="200px" height="auto"/></span>
+            <h1>회원정보수정</h1>
+            <p>회원정보를 수정하세요</p>
+          </header>
+          <hr />
+          
+       				<form method="post">
+               {% csrf_token %}
+							<div class="fields">
+								<div class="field">
+                {{ form.as_p }}
+								</div>
+							</div>
+							<ul class="actions special">
+              {% comment %} 회원가입은 했는데.. {% endcomment %}
+								<li><button class="button" type="submit">수정ㅇㅇ</a></li>
+                {% comment %} 왜안되지? {% endcomment %}
+               {% comment %} <li><a href=" {% url 'accounts:update' %} " class="button" role="button" type="submit">수정</a></li> {% endcomment %}
+                <li><a href=" {% url 'movies:index' %} " class="button" role="button">돌아가기</a></li>
+							</ul>
+						</form>
+						<hr />
+        </section>
+
+      <!-- Footer -->
+        <footer id="footer">
+          <ul class="copyright">
+            <li>&copy; SadHacking </li><li>Designed by: Haily Kim </li>
+          </ul>
+        </footer>
+
+    </div>
+
+  <!-- Scripts -->
+    <script>
+      if ('addEventListener' in window) {
+        window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-preload\b/, ''); });
+        document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+      }
+    </script>
+
+</body>
+</html>

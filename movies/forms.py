@@ -3,6 +3,7 @@ from django import forms
 from .models import Recommendation, Movie, Review
 # from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
+
 class MovieForm(forms.ModelForm):
 
     class Meta:
@@ -18,4 +19,10 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = ['content', 'score', ]
 
+
+class RecommendationForm(forms.ModelForm):
+
+    class Meta:
+        model = Recommendation
+        fields = ['title', 'content', ]
         

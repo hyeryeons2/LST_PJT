@@ -44,9 +44,12 @@
                 <a href=" {% url 'accounts:login' %} ">로그인</a>
                 <br>
                 <p><span class="text-success">{{ user.nickname }}</span>님, 환영띠</p><br>
+                <div>
+                <a href="{% url 'accounts:logout' %}" class="btn btn-secondary" data-dismiss="modal" role="button">로그아웃</a>
+                </div>
                 
                 {% comment %} followers {% endcomment %}
-                <p>팔로워수: </p>
+                <p>팔로워 수: </p>
 
                 {% comment %} following {% endcomment %}
                 <p>팔로잉 수: </p>
@@ -83,8 +86,7 @@
                 {% comment %} 관리자만 영화등록 ㄱㄴ {% endcomment %}
                 <a href="{% url 'movies:addmovie' %}">영화등록</a><br>
                 <a href=" {% url 'accounts:liguild' %} ">길드목록보기</a><br>
-
-                <a href="{  }"></a>
+                {% comment %} 관리자페이지 {% endcomment %}
             </div>
           </div>
         </div>
@@ -92,7 +94,5 @@
     </div>
   </div>
 </div>
-
-
 
 {% endblock body %}

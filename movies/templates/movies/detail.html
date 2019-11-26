@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %} Movie Detail {% endblock title %}
+
+{% block body %}
+  <a href="{% url 'movies:index' %}">main</a>
+
+  {{ movie.title }}
+  {{ movie.title_en }}
+  {{ movie.poster_url }}
+  {{ movie.description }}
+  {{ movie.running_time }}
+  {{ movie.directors }}
+  {{ movie.actors }}
+  {{ movie.nation }}
+  {{ movie.watch_grade }}
+  {{ movie.level }}
+  {{ movie.genres }}
+  {{ movie.open_dt }}<hr>
+
+  {% comment %} 좋아요 기능 / 동영상 위치 옮길때 if 문 새로 만들 것 {% endcomment %}
+  <a href="{% url 'movies:like' movie.pk %}">
+  {% if user in movie.liked_users.all %}
+  <iframe src="{{ movie.review_link }}" frameborder="0"></iframe>
+  <i class="fas fa-heart fa-lg" style="color: yellowgreen"></i>
+  {% else %}
+  <iframe src="{{ movie.preview_link }}" frameborder="0"></iframe>
+  <i class="far fa-heart fa-lg" style="color: yellowgreen"></i>
+  {% endif %}
+  </a>
+  <span id="like-count">{{ movie.liked_users.all | length }}</span>명이 이 글을 좋아합니다.<hr>
+
+  {% comment %} review 시작 {% endcomment %}
+  {% comment %} review list {% endcomment %}
+  {% for review in reviews %}
+    {% comment %} 수정할 review 만 form 으로 바꿈 {% endcomment %}
+    {% if review_pk == review.pk %}
+      <form action="{% url 'movies:reviewupdate' review.pk %}" method="POST">
+        {% csrf_token %}
+        {{ updateform.as_p }}
+        <button type="submit">[수정]</button>
+      </form>
+      {% else %}
+
+      {% comment %} review 는 모든 사람한테 보임 {% endcomment %}
+      <p>{{ review.pk }}. {{ review.content }} {{ review.score }}</p>
+      {% comment %} delete 랑 수정하기는 review 쓴 사람한테만 보임 {% endcomment %}
+      {% if review.user == request.user %}
+        <form action="{% url 'movies:reviewdelete' review.pk %}" method="POST">
+          {% csrf_token %}
+          <button type="submit">DELETE</button>
+        </form>
+        <form action="{% url 'movies:reviewupdate' review.pk %}">
+          <button type="submit">[수정하기]</button>
+        </form>
+      {% endif %}
+      <hr>
+    {% endif %}
+  {% endfor %}<hr>
+
+  {% comment %} review 추가는 로그인한 모든 사람에게 보임 {% endcomment %}
+  {% if user.is_authenticated %}
+  <form action="{% url 'movies:reviews' movie.pk %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">review Create</button>
+  </form>
+  {% endif %}
+  {% comment %} review 끝 {% endcomment %}
+
+{% endblock body %}

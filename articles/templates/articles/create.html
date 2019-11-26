@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Article::Create{% endblock title %}
+
+{% block body %}
+<form method="POST">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button class="btn-warning" type="submit">Create</button>
+</form>
+{% endblock body %}

@@ -3,7 +3,7 @@ from django.views.decorators.http import require_POST, require_GET
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from .models import Recommendation, Movie, Review
-from .forms import MovieForm, ReviewForm
+from .forms import MovieForm, ReviewForm, RecommendationForm
 from decouple import config
 import requests
 import bs4
@@ -128,7 +128,7 @@ def addmovie(request):
         movie.title_en = title_en
         running_time = data['movieInfoResult']['movieInfo']['showTm']
         movie.running_time = running_time
-        # index error 가능
+        # index error 처리해야됨
         watch_grade = data['movieInfoResult']['movieInfo']['audits'][0]['watchGradeNm']
         movie.watch_grade = watch_grade
         genres = ''
@@ -152,7 +152,7 @@ def addmovie(request):
         # number 같이 바꿀지 따로 바꿀지 생각해야됨 
         directors = response['items'][0]['director']
         movie.directors = directors
-        actors = response['items'][0]['actor']
+        actors = response['items'][0]['actor'] 
         movie.actors = actors
         poster_url = response['items'][0]['image']
         movie.poster_url = poster_url
@@ -191,7 +191,10 @@ def addmovie(request):
         link = response_dict['items'][0]['id']['videoId']
         review_link = f'https://www.youtube.com/embed/{link}'
         movie.review_link = review_link
+        if request.POST.get('recommend_id'):
+            movie.recommendation = get_object_or_404(Recommendation, pk=request.POST.get('recommend_id'))
         form = MovieForm(instance=movie)
+    
     context = {'form': form}
     return render(request, 'movies/addmovie.html', context) 
     
@@ -203,3 +206,22 @@ def savemovie(request):
             form.save()
             return redirect('movies:index')
     return render(request, 'movies/addmovie.html', context)
+
+
+def recommendation(request):
+    if request.method == 'POST':
+        form = RecommendationForm(request.POST)
+        if form.is_valid():
+            recommend = form.save(commit=False)
+            recommend.recommend_user = request.user
+            recommend.save()
+            return redirect('movies:index')
+    form = RecommendationForm()
+    context = {'form': form}
+    return render(request, 'movies/recommendation.html', context)
+
+
+def recommendlist(request):
+    recommends = Recommendation.objects.all()
+    context = {'recommends': recommends}
+    return render(request, 'movies/recommendlist.html', context)

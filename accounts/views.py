@@ -39,7 +39,7 @@ def login(request):
             auth_login(request, form.get_user())
             next_page = request.GET.get('next')
             # GET 요청
-            return redirect(next_page or 'accounts:index')
+            return redirect(next_page or 'movies:index')
     else:
         form = AuthenticationForm()
     context = {'form': form}

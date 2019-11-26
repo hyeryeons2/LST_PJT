@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}Article::Detail{% endblock title %}
+
+{% block body %}
+
+<h2>{{ article.title }}</h2>
+<p>{{ article.created_at }}</p>
+<p>작성자: {{ article.user }}</p>
+
+<p>
+  <i 
+    class="{% if user in article.liked_users.all %}fas{% else %}far{% endif %} fa-heart fa-lg" 
+    id="like-btn" 
+    data-id="{{ article.pk }}" 
+    style="color: red"
+  >
+  </i>
+  <span id="like-count">{{ article.liked_users.all | length }}</span>명이 이 글을 좋아합니다.
+</p>
+<hr>
+<p>{{ article.content }}</p>
+<hr>
+
+{% if article.user == request.user %}
+<a href="{% url 'articles:update' article.pk %}">[Update]</a>
+<form action="{% url 'articles:delete' article.pk %}" method="POST">
+  {% csrf_token %}
+  <button class="btn-warning" type="submit">Delete</button>
+</form>
+<hr>
+{% endif %}
+
+{% for comment in comments %}
+<span>{{ comment.pk }}. {{ comment.content }} by {{ comment.user }}</span>
+{% if comment.user == request.user or article.user == request.user %}
+<form action="{% url 'articles:comment_delete' comment.pk %}", method="POST">
+  {% csrf_token %}
+  <button class="btn btn-link" type="submit">Comment Delete</button>
+</form>
+<hr>
+{% endif %}
+{% endfor %}
+
+{% if user.is_authenticated %}
+<form action="{% url 'articles:comment_create' article.pk %}", method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="btn-warning" type="submit">Comment Create</button>
+</form>
+{% endif %}
+
+<hr>
+{% include 'articles/_follow.html' %}
+
+<script>
+  const likeBtn = document.querySelector('#like-btn')
+  likeBtn.addEventListener('click', function(event) {
+    const articleId = event.target.dataset.id
+    axios.get(`/articles/${articleId}/like/`)
+      .then(function(response) {
+        if(response.data.liked) {
+          likeBtn.classList.remove('far')
+          likeBtn.classList.add('fas')
+        } else {
+          likeBtn.classList.remove('fas')
+          likeBtn.classList.add('far')          
+        } 
+        const likeCount = document.querySelector('#like-count')
+        likeCount.innerText = response.data.count
+      })
+  })
+</script>
+{% endblock body %}

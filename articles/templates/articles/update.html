@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Article::Update{% endblock title %}
+
+{% block body %}
+<form method="POST">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button type="submit">Update</button>
+</form>
+{% endblock body %}

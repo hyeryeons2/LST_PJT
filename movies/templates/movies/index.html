@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Main{% endblock title %}
 
@@ -8,8 +9,9 @@
   btn
   </button>
   <a class="navbar-brand" href="{% url 'movies:index' %}">
-    <img src="/static/movies/images/peng.jpg" width="30" height="30" class="d-inline-block align-top" alt="peng">
-    HOME
+    <i class="fas fa-biohazard" width="30" height="30" > Home</i>
+    {% comment %} <img src="/static/movies/images/peng.jpg" width="30" height="30" class="d-inline-block align-top" alt="peng">
+    HOME {% endcomment %}
   </a>
   <a href="#">전체영화조회</a>
   <a href="#">추천영화조회</a>
@@ -32,7 +34,7 @@
             <div class="card-body">
                 {% comment %} 유저레벨별 캐릭터 img 들어갈 예정 {% endcomment %}
                 <div class="lev_img">
-                  <img src="/static/accounts/images/lev_img/zombie.png" alt="zombie_lev1">
+                  <img src="/static/movies/images/pengpeng.jpg" alt="lev2">
                 </div>
                 {% comment %} 로그인(나중에 지울거) {% endcomment %}
                 <a href=" {% url 'accounts:login' %} ">로그인</a>

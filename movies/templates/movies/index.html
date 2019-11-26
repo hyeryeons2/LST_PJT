@@ -24,13 +24,37 @@
           <div class="card-header">내 정보 보기</div>
             <div class="card-body">
                 {% comment %} 유저레벨별 캐릭터 img 들어갈 예정 {% endcomment %}
-
+                <div class="lev_img">
+                  <img src="/static/accounts/images/lev_img/zombie.png" alt="zombie_lev1">
+                </div>
+                {% comment %} 로그인(나중에 지울거) {% endcomment %}
+                <a href=" {% url 'accounts:login' %} ">로그인</a>
                 <p>{{ user.nickname }} 님, 환영띠</p><br>
+
                 <p>lev.{{ user.level }}</p>
+
                 <a href="{% url 'accounts:update' %}">내 정보수정</a><br>
-                {% comment %} <form action=" {% url 'accounts:' %}"> {% endcomment %}
-                <a href=" {% url 'accounts:logout' %}  ">로그아웃</a><br>
-                {% comment %} </form> {% endcomment %}
+
+                <a class="logout_modal" href=" {% url 'accounts:logout' %}" data-toggle="modal" data-target="#exampleModal" >로그아웃</a><br>
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>로그아웃ㄱㄱ?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <a href=" {% url 'movies:index' %} " class="btn btn-secondary" data-dismiss="modal" role="button">취소</a>
+                        <a href=" {% url 'accounts:logout' %} " class="btn btn-primary" role="button">로그아웃</a>
+                      </div>
+                    </div>
+                    </div>
+                    </div>
                 <a href=" {% url 'accounts:liguild' %} ">길드가입</a><br>
                 <a href=" {% url 'accounts:liguild' %} ">길드탈퇴</a><br>
 

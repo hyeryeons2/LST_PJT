@@ -10,3 +10,12 @@ class MovieForm(forms.ModelForm):
         fields = '__all__'
         # widgets = {
         # }
+
+
+class ReviewForm(forms.ModelForm):
+
+    class Meta:
+        model = Review
+        fields = ['content', 'score', ]
+
+        

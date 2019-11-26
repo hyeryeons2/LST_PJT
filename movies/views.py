@@ -3,11 +3,11 @@ from django.views.decorators.http import require_POST, require_GET
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from .models import Recommendation, Movie, Review
-from .forms import MovieForm
-import requests
+from .forms import MovieForm, ReviewForm
 from decouple import config
-from pprint import pprint
+import requests
 import bs4
+from pprint import pprint
 
 
 def intro(request):
@@ -15,7 +15,89 @@ def intro(request):
 
 
 def index(request):
-    return render(request, 'movies/index.html')
+    movies = Movie.objects.all()
+    context = {'movies': movies}
+    return render(request, 'movies/index.html', context)
+
+
+@require_GET
+def detail(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    reviews = movie.reviews.all()
+    form = ReviewForm()
+    context = {
+        'movie': movie,
+        'reviews': reviews,
+        'form': form,        
+    }
+    return render(request, 'movies/detail.html', context)
+
+
+@login_required
+def like(request, movie_pk):
+    user = request.user
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    if movie.liked_users.filter(pk=user.pk).exists():
+        user.liked_movies.remove(movie)
+        liked = False 
+    else:
+        user.liked_movies.add(movie)
+        liked = True
+    context = {
+        'liked': liked, 
+        'count': movie.liked_users.count()
+    }
+    return redirect('movies:detail', movie_pk)
+
+
+@require_POST
+def reviews(request, movie_pk):
+    if request.user.is_authenticated:
+        movie = get_object_or_404(Movie, pk=movie_pk)
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.movie_id = movie_pk
+            review.user = request.user
+            review.save()
+    return redirect('movies:detail', movie_pk)
+
+
+def reviewupdate(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    movie_pk = review.movie_id
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    reviews = movie.reviews.all()
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            form = ReviewForm()
+            context = {
+                'movie': movie,
+                'reviews': reviews,
+                'form': form,        
+            }
+    else: 
+        form = ReviewForm()
+        updateform = ReviewForm(instance=review)
+        context = {
+            'movie': movie,
+            'reviews': reviews,
+            'form': form,   
+            'updateform': updateform, 
+            'review_pk': review_pk, 
+        }
+    return render(request, 'movies/detail.html', context)
+
+
+@require_POST
+def reviewdelete(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    movie_pk = review.movie_id
+    if review.user == request.user:
+        review.delete()
+    return redirect('movies:detail', movie_pk)
 
 
 def addmovie(request):

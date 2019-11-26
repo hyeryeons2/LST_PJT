@@ -18,6 +18,13 @@
   <a href="#">영화메이트찾기</a>
 </nav>
 
+<div>
+  {% comment %} movie list {% endcomment %}
+  {% for movie in movies %}
+    <a href="{% url 'movies:detail' movie.id %}">{{ movie.title }}</a>
+  {% endfor %} 
+</div>
+
 <div class="collapse" id="collapseExample">
   <div class="row justify-content-left">
     <div class="col-md-2">

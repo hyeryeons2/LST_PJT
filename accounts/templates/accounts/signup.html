@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,7 +12,10 @@
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+  
+  {% comment %} bootstrap CDN {% endcomment %}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
+  
   {% comment %} templates {% endcomment %}
   <link rel="stylesheet" href="../../../static/accounts/css/accounts.css" />
   <noscript><link rel="stylesheet" href="../../../static/accounts/css/accounts2.css" /></noscript>
@@ -42,9 +47,34 @@
 									<input type="radio" id="robot_no" name="robot" /><label for="robot_no">No</label>
 								</div>
 							</div>
+
 							<ul class="actions special">
-              {% comment %} 회원가입은 했는데.. {% endcomment %}
-                <button type="submit">회원가입</button>
+                {% comment %} <button type="submit">가입하기</button> {% endcomment %}
+
+{% comment %} 회원가입 modal {% endcomment %}
+                <button class="signup_modal"type="submit" data-toggle="modal" data-target="#exampleModal" >가입하기</button>
+
+							   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">SignUp</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>회원가입 </p>
+                      </div>
+                      <div class="modal-footer">
+                        <a href=" {% url 'movies:index' %} " class="btn btn-secondary" data-dismiss="modal" role="button">취소</a>
+                        <a href=" {% url 'accounts:logout' %} " class="btn btn-primary" role="button">로그아웃</a>
+                      </div>
+                    </div>
+                    </div>
+                    </div>
+
+
 							</ul>
 						</form>
 								{% comment %} <li><a href=" {% url 'accounts:signup' %} " class="button">회원가입</a></li> {% endcomment %}

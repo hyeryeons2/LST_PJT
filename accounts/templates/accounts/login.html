@@ -1,58 +1,103 @@
-{% extends 'base.html' %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Log in</title>
+
+  {% comment %} bootstrap CDN {% endcomment %}
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>{% comment %} bootstrap CDN {% endcomment %}
+ 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
-{% block title %}Login{% endblock title %}
+  {% comment %} templates {% endcomment %}
+  <link rel="stylesheet" href="../../../static/accounts/css/accounts.css" />
+  <noscript><link rel="stylesheet" href="../../../static/accounts/css/accounts2.css" /></noscript>
 
-{% block body %}
+</head>
+<body class="is-preload">
+  <!-- Wrapper -->
+    <div id="wrapper">
 
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-			<div class="card">
-				<div class="card-header">
-					<h3 >Login</h3>
-				</div>
-				<div class="card-body">
-				{% comment %} <form>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user"></i></span>
-						</div>
-						<input type="text" class="form-control" placeholder="username">
-						
-					</div>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-						<input type="password" class="form-control" placeholder="password">
-					</div> {% endcomment %}
+      <!-- Main -->
+        <section id="main">
+          <header>
+            <span class="avatar"><img src="/static/accounts/images/tmp_pensu.jpg" alt="tmp_img" width="200px" height="auto"/></span>
+            <h1>로그인</h1>
+            <p>[미정]</p>
+          </header>
+          <hr />
+          
+       				<form method="post" action="#">
+               {% csrf_token %}
+							<div class="fields">
+								<div class="field">
+                {{ form.as_p }}
+								</div>
+							</div>
+							<ul class="actions special">
+                <button type="submit" >로그인</button>
+              </ul>
+						</form>
+                <form action=" {% url 'movies:intro' %} ">
+                  <button>돌아가기</button>
+                </form>
+						<hr />
 
-					<form method="POST"  action=" {% url 'accounts:login' %} ">
-						{% csrf_token %}
-						{{ form.as_p }}					
-					<div class="row align-items-center remember">
-						<input type="checkbox">RememberMe
-					</div>
-					<div class="form-group">
-						<input type="submit" value="로그인" class="btn btn-outline-secondary float-right login_btn">
-					</div>
-					</form>
+{% comment %} 비밀번호 잊음 누르면 나가 modal 띄우면서 intro로 튕기기 {% endcomment %}
+          <!-- Button trigger modal -->
+          {% comment %} <a class="modal_message" href=" {% url 'movies:intro' %} " data-toggle="modal" data-target="#exampleModalCenter" role="button">비번?</a> {% endcomment %}
+          {% comment %} <p data-toggle="modal" data-target="#exampleModalCenter">비번?!</p> {% endcomment %}
+          {% comment %} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            Launch demo modal
+          </button>
 
-				{% comment %} </form> {% endcomment %}
-			</div>
-			<div class="card-footer">
-				<div class="d-flex justify-content-center links">
-					계정없어?<a href="{% url 'accounts:signup' %}">가입ㄱㄱ</a>
-				</div>
-				<div class="d-flex justify-content-center">
-					<a href="#">비밀번호 잊음?</a>
-					{% comment %} 나가 {% endcomment %}
-				</div>
-			</div>
-		{% comment %} </div>
-	</div>
-</div> {% endcomment %}
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div> {% endcomment %}
 
-{% endblock body %}
+                  </section>
+
+                <!-- Footer -->
+                  <footer id="footer">
+                    <ul class="copyright">
+                      <li>&copy; SadHacking </li><li>Designed by: Haily Kim </li>
+                    </ul>
+                  </footer>
+
+              </div>
+
+  <!-- Scripts -->
+    <script>
+      if ('addEventListener' in window) {
+        window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-preload\b/, ''); });
+        document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+      }
+    </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -18,3 +18,4 @@ class User(AbstractUser):
         related_name='followings' 
     )
     group = models.ForeignKey(Guild, related_name='member', on_delete=models.SET_NULL, blank=True, null=True)
+    level = models.IntegerField(default=1)

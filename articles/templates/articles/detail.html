@@ -8,6 +8,7 @@
 <p>{{ article.created_at }}</p>
 <p>작성자: {{ article.user }}</p>
 
+{% comment %} 좋아요 {% endcomment %}
 <p>
   <i 
     class="{% if user in article.liked_users.all %}fas{% else %}far{% endif %} fa-heart fa-lg" 
@@ -22,37 +23,79 @@
 <p>{{ article.content }}</p>
 <hr>
 
+{% comment %} 밑에 두면 안보여서 올려둠 {% endcomment %}
+<p>팔로잉 : {{ article.user.followings.all | length }} / 팔로워 : {{ article.user.followers.all | length }}</p>
+{% if user != article.user %}
+  {% if user in article.user.followers.all %}
+  <a href="{% url 'articles:follow' article.pk article.user.pk %}">Unfollow</a>
+  {% else %}
+  <a href="{% url 'articles:follow' article.pk article.user.pk %}">Follow</a>
+  {% endif %} 
+{% endif %}
+<hr>
+
+{% comment %} 작성자면 수정, 삭제 가능 {% endcomment %}
 {% if article.user == request.user %}
 <a href="{% url 'articles:update' article.pk %}">[Update]</a>
 <form action="{% url 'articles:delete' article.pk %}" method="POST">
   {% csrf_token %}
-  <button class="btn-warning" type="submit">Delete</button>
+  <button type="submit">Delete</button>
 </form>
 <hr>
 {% endif %}
 
 {% for comment in comments %}
-<span>{{ comment.pk }}. {{ comment.content }} by {{ comment.user }}</span>
-{% if comment.user == request.user or article.user == request.user %}
-<form action="{% url 'articles:comment_delete' comment.pk %}", method="POST">
-  {% csrf_token %}
-  <button class="btn btn-link" type="submit">Comment Delete</button>
-</form>
-<hr>
+
+{% comment %} 댓글 수정 {% endcomment %}
+{% if comment_pk == comment.pk %}
+  <form action="{% url 'articles:comment_update' comment.pk %}" method="POST">
+    {% csrf_token %}
+    {{ updateform.as_p }}
+    <button type="submit">[수정]</button>
+  </form>
+{% else %}
+
+  {% comment %} 비밀댓글 처리 {% endcomment %}
+  {% if comment.secret %}
+    {% if comment.user == request.user or article.user == request.user %}
+    <span>{{ comment.pk }}. {{ comment.content }} by {{ comment.user }}</span>
+    {% else %}
+    <span>비밀 댓글입니다.</span>
+    {% endif %}
+  {% else %}
+  <span>{{ comment.pk }}. {{ comment.content }} by {{ comment.user }}</span>
+  {% endif %}<br>
+
+  {% comment %} 글 작성자와 댓글 작성자만 댓글 삭제 가능 {% endcomment %}
+  {% if comment.user == request.user or article.user == request.user %}
+  <form action="{% url 'articles:comment_delete' comment.pk %}", method="POST">
+    {% csrf_token %}
+    <button type="submit">Comment Delete</button>
+  </form>
+  {% endif %}
+
+  {% comment %} 글 작성자만 수정 가능 {% endcomment %}
+  {% if comment.user == request.user %}
+  <form action="{% url 'articles:comment_update' comment.pk %}">
+    <button type="submit">[수정하기]</button>
+  </form>
+  <hr>
+  {% endif %}
 {% endif %}
+
 {% endfor %}
 
+<hr>
+{% comment %} 로그인한 사람만 댓글 작성 가능 {% endcomment %}
 {% if user.is_authenticated %}
 <form action="{% url 'articles:comment_create' article.pk %}", method="POST">
   {% csrf_token %}
   {{ form.as_p }}
-  <button class="btn-warning" type="submit">Comment Create</button>
+  <button type="submit">Comment Create</button>
 </form>
 {% endif %}
 
-<hr>
-{% include 'articles/_follow.html' %}
-
+{% comment %} 좋아요 javascript {% endcomment %}
 <script>
   const likeBtn = document.querySelector('#like-btn')
   likeBtn.addEventListener('click', function(event) {

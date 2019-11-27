@@ -38,8 +38,8 @@
     HOME {% endcomment %}
   </a>
   <a href="#" class="text-light">전체영화조회</a>
-  <a href="#" class="text-light">추천영화조회</a>
-  <a href="#" class="text-light">자유게시판</a>
+  <a href="{% url 'movies:movielevellist' %}" class="text-light">추천영화조회</a>
+  <a href="{% url 'articles:index' %}" class="text-light">자유게시판</a>
 </nav>
 
 {% comment %} 이미지 넣는 법 {% endcomment %}

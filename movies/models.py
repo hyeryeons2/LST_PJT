@@ -20,7 +20,7 @@ class Movie(models.Model):
     actors = models.CharField(max_length=100)
     nation = models.CharField(max_length=50, blank=True, null=True)
     watch_grade = models.CharField(max_length=30)
-    level = models.IntegerField()
+    level = models.IntegerField(default=3)
     review_link = models.CharField(max_length=200)
     preview_link = models.CharField(max_length=200)
     genres = models.CharField(max_length=100)

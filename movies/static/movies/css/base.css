@@ -110,11 +110,12 @@ input, select, textarea {
 /* Type */
 
 	body, input, select, textarea {
-		color: #585858;
+		color: whitesmoke;
 		font-family: "Source Sans Pro", Helvetica, sans-serif;
 		font-size: 16pt;
 		font-weight: 300;
 		line-height: 1.75;
+		text-decoration-color: yellowgreen;
 	}
 
 		@media screen and (max-width: 1680px) {
@@ -145,7 +146,7 @@ input, select, textarea {
 
 		a:hover {
 			border-bottom-color: transparent;
-			color: #f2849e !important;
+			color: #1a6126 !important;
 		}
 
 	strong, b {
@@ -1850,8 +1851,8 @@ input, select, textarea {
 			}
 
 			.icon.style2:hover {
-				color: #f2849e;
-				border-color: #f2849e;
+				color: #1a6126 ;
+				border-color: #1a6126 ;
 			}
 
 			.icon.style2:active {
@@ -2164,8 +2165,8 @@ input, select, textarea {
 		input[type="tel"]:focus,
 		select:focus,
 		textarea:focus {
-			border-bottom-color: #f2849e;
-			box-shadow: inset 0 -1px 0 0 #f2849e;
+			border-bottom-color: #1a6126 ;
+			box-shadow: inset 0 -1px 0 0 #1a6126 ;
 		}
 
 	select {
@@ -2269,8 +2270,8 @@ input, select, textarea {
 
 		input[type="checkbox"]:focus + label:before,
 		input[type="radio"]:focus + label:before {
-			border-color: #f2849e;
-			box-shadow: 0 0 0 1px #f2849e;
+			border-color: #1a6126 ;
+			box-shadow: 0 0 0 1px #1a6126 ;
 		}
 
 	input[type="checkbox"] + label:before {
@@ -2488,8 +2489,8 @@ input, select, textarea {
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			color: #f2849e !important;
-			box-shadow: inset 0 0 0 2px #f2849e;
+			color: #1a6126  !important;
+			box-shadow: inset 0 0 0 2px #1a6126 ;
 		}
 
 		input[type="submit"]:active,
@@ -2531,7 +2532,7 @@ input, select, textarea {
 			input[type="button"].primary:hover,
 			button.primary:hover,
 			.button.primary:hover {
-				background-color: #f2849e;
+				background-color: #1a6126 ;
 			}
 
 			input[type="submit"].primary:active,
@@ -2539,7 +2540,7 @@ input, select, textarea {
 			input[type="button"].primary:active,
 			button.primary:active,
 			.button.primary:active {
-				background-color: #ee5f81;
+				background-color: #1a6126 ;
 			}
 
 		input[type="submit"].disabled, input[type="submit"]:disabled,
@@ -2566,7 +2567,7 @@ input, select, textarea {
 		-webkit-flex-wrap: wrap;
 		-ms-flex-wrap: wrap;
 		flex-wrap: wrap;
-		postiion: relative;
+		position: relative;
 		margin: -2.5em 0 0 -2.5em;
 	}
 
@@ -2700,7 +2701,7 @@ input, select, textarea {
 					}
 
 			.tiles article.style1 > .image:before {
-				background-color: #f2849e;
+				background-color: #1a6126 ;
 			}
 
 			.tiles article.style2 > .image:before {
@@ -2712,7 +2713,7 @@ input, select, textarea {
 			}
 
 			.tiles article.style4 > .image:before {
-				background-color: #c75b9b;
+				background-color: #1a6126 ;
 			}
 
 			.tiles article.style5 > .image:before {
@@ -3327,6 +3328,8 @@ input, select, textarea {
 /* custom */
 body {
 	background-color: rgba(10, 20, 15, 0.849); 
+	/* background-image: url('../images/base/infection.png'); */
+	background-repeat: no-repeat;
 	animation: fadeInAnimation ease 3s; 
 	animation-iteration-count: 1; 
 	animation-fill-mode: forwards; 

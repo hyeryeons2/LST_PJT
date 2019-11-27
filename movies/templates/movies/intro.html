@@ -5,8 +5,10 @@
 		<title>Landing Page</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../../../static/movies/css/intro.css" />
-		<noscript><link rel="stylesheet" href="../../../static/movies/css/intro2.css" /></noscript>
+		<link rel="stylesheet" href="{% static 'movies/css/intro.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'movies/css/intro2.css' %}" /></noscript>
+		{% comment %} <link rel="stylesheet" href="../../../static/movies/css/intro.css" /> {% endcomment %}
+		{% comment %} <noscript><link rel="stylesheet" href="../../../static/movies/css/intro2.css" /></noscript> {% endcomment %}
 	</head>
 
 	<body class="is-preload">

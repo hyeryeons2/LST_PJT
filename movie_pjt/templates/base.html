@@ -8,6 +8,9 @@
 		
 		<title>{% block title %}{% endblock title %}</title>
 
+		{% comment %} favicon 적용 {% endcomment %}
+  	<link rel="shortcut icon" href="{% static 'movies/images/favicon.png' %}" type="image/x-icon">
+
 		{% comment %} bootstrap CDN {% endcomment %}
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -20,6 +23,13 @@
 	</head>
 
 	<body class="is-preload">
+
+		{% comment %} BGM 재생 {% endcomment %}
+		{% comment %} <iframe src="{% static 'movies/audio/soundtrack1.mp3' %}" allow="autoplay" id="audio" style="display:none"></iframe> {% endcomment %}
+		{% comment %} <audio id="audio" autoplay>
+		<source src="={% static 'movies/audio/silence.mp3' %}">
+		</audio> {% endcomment %}
+
 		<!-- Wrapper -->
 			<div id="wrapper">
 			{% comment %} <div id="bg"> <img src=" {% static 'movies/images/base/main_bg.jpg' %} " alt="main_bg_img"> </div> {% endcomment %}
@@ -29,8 +39,8 @@
 						<div class="inner">
 
 							<!-- Logo -->
-								<a href="index.html" class="logo">
-									<span class="symbol"><img src=" {% static 'movies/images/base/logo.svg' %}" alt="" /></span><span class="title">Phantom</span>
+								<a href="{% url 'movies:index' %}" class="logo">
+									<span class="symbol"><img src=" {% static 'movies/images/favicon.png' %} " alt="ghost"></span><span class="title">Z:omBie</span>
 								</a>
 
 							<!-- Nav -->

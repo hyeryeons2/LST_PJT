@@ -80,7 +80,7 @@ input, select, textarea {
 	}
 
 	body {
-		background: #fff;
+		background: black;
 		overflow: hidden;
 	}
 
@@ -223,7 +223,7 @@ input, select, textarea {
 		transform: translate3d(0,0,0);
 	/* Set your background with this */
 
-		background: #243027 url("../images/intro.jpg") bottom left;
+		background: #0a0e0b url("../images/intro.jpg") bottom left;
 		background-repeat: repeat-x;
 		height: 100%;
 		left: 0;

@@ -8,9 +8,23 @@ class MovieForm(forms.ModelForm):
 
     class Meta:
         model = Movie
-        fields = '__all__'
-        # widgets = {
-        # }
+        fields = [
+            'title', 
+            'title_en', 
+            'poster_url', 
+            'description', 
+            'running_time', 
+            'directors', 
+            'actors', 
+            'nation', 
+            'watch_grade', 
+            'genres', 
+            'open_dt',
+            'review_link',
+            'preview_link',
+            'level',
+            'recommendation',
+        ]
 
 
 class ReviewForm(forms.ModelForm):

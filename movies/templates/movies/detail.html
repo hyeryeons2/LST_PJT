@@ -5,9 +5,10 @@
 {% block body %}
   <a href="{% url 'movies:index' %}">main</a>
 
+  <img src="{{ movie.poster_url }}" alt="">
+
   {{ movie.title }}
   {{ movie.title_en }}
-  {{ movie.poster_url }}
   {{ movie.description }}
   {{ movie.running_time }}
   {{ movie.directors }}
@@ -16,8 +17,16 @@
   {{ movie.watch_grade }}
   {{ movie.level }}
   {{ movie.genres }}
-  {{ movie.open_dt }}<hr>
-
+  {{ movie.open_dt }}
+  <hr>
+  
+  {% comment %} 추천한 사람 나오는 곳 {% endcomment %}
+  {% if movie.recommendation %}
+    <p>추천한 사람</p>
+    <strong>{{ movie.recommendation.content }} by {{ movie.recommendation.recommend_user.nickname }}</strong>
+  {% endif %}
+  <hr>
+  
   {% comment %} 좋아요 기능 / 동영상 위치 옮길때 if 문 새로 만들 것 {% endcomment %}
   <a href="{% url 'movies:like' movie.pk %}">
   {% if user in movie.liked_users.all %}

@@ -108,21 +108,26 @@ def reviewdelete(request, review_pk):
     return redirect('movies:detail', movie_pk)
 
 
+# 혹시 값이 이상하면 수동으로 하세요
 def addmovie(request):
     form =  MovieForm()
     if request.method == 'POST':
         movie = Movie()
 
         search = request.POST.get('movie')
+        if not request.POST.get('listNM'):
+            listnumber = 0
+        else:
+            listnumber = int(request.POST.get('listNM'))
         key = config('API_KEY')
         base_url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json'
         api_url = f'{base_url}?key={key}&movieNm={search}'
         response = requests.get(api_url)
         data = response.json()
 
-        # number 바꾸면서 할 예정 
-        movieCd = data['movieListResult']['movieList'][0]['movieCd']
-        nation = data['movieListResult']['movieList'][0]['repNationNm']
+        # number 바꾸면서 하는 중
+        movieCd = data['movieListResult']['movieList'][listnumber]['movieCd']
+        nation = data['movieListResult']['movieList'][listnumber]['repNationNm']
         movie.nation = nation
 
         base_url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json'
@@ -134,16 +139,20 @@ def addmovie(request):
         movie.title = title
         title_en = data['movieInfoResult']['movieInfo']['movieNmEn']
         movie.title_en = title_en
+        searchtitle = title_en.title()
         running_time = data['movieInfoResult']['movieInfo']['showTm']
         movie.running_time = running_time
-        # index error 처리해야됨
-        watch_grade = data['movieInfoResult']['movieInfo']['audits'][0]['watchGradeNm']
-        movie.watch_grade = watch_grade
+        # index error 처리됨
+        if data['movieInfoResult']['movieInfo']['audits'] == []:
+            movie.watch_grade = '관람등급 알수없음'
+        else:
+            watch_grade = data['movieInfoResult']['movieInfo']['audits'][0]['watchGradeNm']
+            movie.watch_grade = watch_grade
         genres = ''
         genre_list = data['movieInfoResult']['movieInfo']['genres']
         for genre in genre_list:
             genres += genre['genreNm'] + '|' 
-        movie.genres = genres
+        movie.genres = genres[:-1]
         openDt = data['movieInfoResult']['movieInfo']['openDt']
         movie.open_dt = openDt
 
@@ -157,21 +166,24 @@ def addmovie(request):
         API_URL = f'{BASE_URL}?query={search}'
         response = requests.get(API_URL, headers=HEADER).json()
 
-        # number 같이 바꿀지 따로 바꿀지 생각해야됨 
-        directors = response['items'][0]['director']
-        movie.directors = directors
-        actors = response['items'][0]['actor'] 
-        movie.actors = actors
-        poster_url = response['items'][0]['image']
-        movie.poster_url = poster_url
+        # 영어 제목으로 영진위 API 의 검색 결과와 네이버 API 의 검색 결과 연결 
+        items = response['items']
+        for item in items:
+            if item['subtitle'].title() == searchtitle:
+                directors = item['director']
+                movie.directors = directors[:-1]
+                actors = item['actor'] 
+                movie.actors = actors[:-1]
+                poster_url = item['image']
+                movie.poster_url = poster_url
 
-        story_URL  = response['items'][0]['link']
-        response = requests.get(story_URL)
-        html = response.text
-        soup = bs4.BeautifulSoup(html, 'html.parser')
-        # 태그는 알아서 처리됨 
-        description = soup.find('p', class_='con_tx').get_text()
-        movie.description = description
+                story_URL  = item['link']
+                response = requests.get(story_URL)
+                html = response.text
+                soup = bs4.BeautifulSoup(html, 'html.parser')
+                # 태그는 알아서 처리됨 
+                description = soup.find('p', class_='con_tx').get_text()
+                movie.description = description
  
         url = 'https://www.googleapis.com/youtube/v3/search'
         params = {
@@ -201,6 +213,8 @@ def addmovie(request):
         movie.review_link = review_link
         if request.POST.get('recommend_id'):
             movie.recommendation = get_object_or_404(Recommendation, pk=request.POST.get('recommend_id'))
+            movie.recommendation.finish = True 
+            movie.recommendation.save()
         form = MovieForm(instance=movie)
     
     context = {'form': form}

@@ -44,10 +44,14 @@
 							</div>
 							<ul class="actions special">
               {% comment %} 회원가입은 했는데.. {% endcomment %}
-								<li><a href=" {% url 'accounts:signup' %} " class="button">회원가입</a></li>
-                <li><a href=" {% url 'movies:intro' %} " class="button">돌아가기</a></li>
+                <button type="submit">회원가입</button>
 							</ul>
 						</form>
+								{% comment %} <li><a href=" {% url 'accounts:signup' %} " class="button">회원가입</a></li> {% endcomment %}
+                <form action=" {% url 'movies:intro' %} ">
+                  <button>돌아가기</button>
+                </form>
+                {% comment %} <li><a href=" {% url 'movies:intro' %} " class="button">돌아가기</a></li> {% endcomment %}
 						<hr />
         </section>
 

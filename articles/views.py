@@ -81,6 +81,35 @@ def comment_create(request, article_pk):
             return redirect('articles:detail', article_pk)
 
 
+@login_required
+def comment_update(request, comment_pk):
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    article_pk = comment.article_id
+    article = get_object_or_404(Article, pk=article_pk)
+    comments = article.comments.all()
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            form = CommentForm()
+            context = {
+                'article': article,
+                'comments': comments,
+                'form': form,        
+            }
+    else: 
+        form = CommentForm()
+        updateform = CommentForm(instance=comment)
+        context = {
+            'article': article,
+            'comments': comments,
+            'form': form,   
+            'updateform': updateform, 
+            'comment_pk': comment_pk, 
+        }
+    return render(request, 'articles/detail.html', context)
+
+
 @require_POST
 def comment_delete(request, comment_pk):
     if request.user.is_authenticated:

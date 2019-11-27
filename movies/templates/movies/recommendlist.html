@@ -4,17 +4,19 @@
 
 {% block body %}
 {% for recommend in recommends %}
+  {% if not recommend.finish %}
+  {% comment %} 뭔가 형식을 바꿔야 할 거 같은데... {% endcomment %}
+  <form action="{% url 'movies:addmovie' %}" method="POST" class="form-inline my-2 my-lg-0">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="text" value="{{ recommend.title }}" id="movie" name="movie">
+    <input class="form-control mr-sm-2" type="text" value="{{ recommend.recommend_user }}" id="recommend_user" name="recommend_user">
+    <input class="form-control mr-sm-2" type="text" value="{{ recommend.id }}" id="recommend_id" name="recommend_id">
+    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">검색</button>
+  </form>
 
-{% comment %} 뭔가 형식을 바꿔야 할 거 같은데... {% endcomment %}
-<form action="{% url 'movies:addmovie' %}" method="POST" class="form-inline my-2 my-lg-0">
-  {% csrf_token %}
-  <input class="form-control mr-sm-2" type="text" value="{{ recommend.title }}" id="movie" name="movie">
-  <input class="form-control mr-sm-2" type="text" value="{{ recommend.recommend_user }}" id="recommend_user" name="recommend_user">
-  <input class="form-control mr-sm-2" type="text" value="{{ recommend.id }}" id="recommend_id" name="recommend_id">
-  <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">검색</button>
-</form>
-
-{{ recommend.content }}<br>
+  {{ recommend.content }}<br>
+  
+  {% endif %}
 {% endfor %}
 
 {% endblock body %}

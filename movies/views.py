@@ -20,6 +20,14 @@ def index(request):
     return render(request, 'movies/index.html', context)
 
 
+@login_required
+def movielevellist(request):
+    level = request.user.level 
+    movies = Movie.objects.filter(level=level)
+    context = {'movies': movies}
+    return render(request, 'movies/movielevellist.html', context)
+
+
 @require_GET
 def detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)

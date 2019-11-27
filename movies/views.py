@@ -115,7 +115,10 @@ def addmovie(request):
         movie = Movie()
 
         search = request.POST.get('movie')
-        listnumber = int(request.POST.get('listNM'))
+        if not request.POST.get('listNM'):
+            listnumber = 0
+        else:
+            listnumber = int(request.POST.get('listNM'))
         key = config('API_KEY')
         base_url = 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json'
         api_url = f'{base_url}?key={key}&movieNm={search}'
@@ -210,6 +213,8 @@ def addmovie(request):
         movie.review_link = review_link
         if request.POST.get('recommend_id'):
             movie.recommendation = get_object_or_404(Recommendation, pk=request.POST.get('recommend_id'))
+            movie.recommendation.finish = True 
+            movie.recommendation.save()
         form = MovieForm(instance=movie)
     
     context = {'form': form}

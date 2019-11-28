@@ -146,7 +146,7 @@ input, select, textarea {
 
 		a:hover {
 			border-bottom-color: transparent;
-			color: #1a6126 !important;
+			color: yellowgreen !important;
 		}
 
 	strong, b {
@@ -1851,8 +1851,8 @@ input, select, textarea {
 			}
 
 			.icon.style2:hover {
-				color: #1a6126 ;
-				border-color: #1a6126 ;
+				color: #3b8b48 ;
+				border-color: #3b8b48  ;
 			}
 
 			.icon.style2:active {

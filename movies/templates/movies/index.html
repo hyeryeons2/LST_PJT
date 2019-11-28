@@ -7,40 +7,11 @@
 
   <div id="main">
     <div class="inner">
-      <h1>WELCOME!</h1>
+    <header><h1>WELCOME!</h1></header><hr>
 
-    {% comment %} carousel {% endcomment %}
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="{% static 'movies/images/index/1.jpg' %}" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="{% static 'movies/images/index/2.jpg' %}" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="{% static 'movies/images/index/3.png' %}" alt="Third slide">
-    </div>
+      <p>이 사이트를 발견하신 당신은 진심 찐...은 아니고,</p>      
+      <p>좀비영화 입문자부터 매니아까지 함께 정보를 공유할 수 있는 사이트입니다.:)</p>
+      <p>오른쪽 탭을 누르고 한번 둘러보세요!</p>
+      </div>
   </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-    </div>
-  </div>
-      {% comment %} <span class="image main"><img src="{% static 'movies/images/base/pic13.jpg' %}" alt="" /></span> {% endcomment %}
-      <p>가장 처음에 뜨는 페이지 입니다.</p>
-      <p>여기에는 base.html에 영화 목록들을 몇개 추려서 card로 보여줄 거에요!</p>
-      <p>기대하세요~~</p>
-
-    <script>
-    $('.carousel').carousel({
-    interval: 2000
-  })
-    </script>
 {% endblock body %}

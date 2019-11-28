@@ -32,58 +32,25 @@
         <section id="main">
           <header>
             <span class="avatar"><img src="/static/accounts/images/tmp_pensu.jpg" alt="tmp_img" width="200px" height="auto"/></span>
-            <h1>회원가입</h1>
+            <h1>Join Us!</h1>
             <p>Be a Walker!</p>
           </header>
           <hr />
-          
-       				<form method="post" action="#">
-               {% csrf_token %}
-							<div class="fields">
-								<div class="field">
-                {{ form.as_p }}
-									<input type="checkbox" id="human" name="human" /><label for="human">나는 사람입니다</label>
-								</div>
-								<div class="field">
-									<label>로봇인가요?</label>
-									<input type="radio" id="robot_yes" name="robot" /><label for="robot_yes">Yes</label>
-									<input type="radio" id="robot_no" name="robot" /><label for="robot_no">No</label>
-								</div>
-							</div>
-
-							<ul class="actions special">
-                {% comment %} <button type="submit">가입하기</button> {% endcomment %}
-
-{% comment %} 회원가입 modal {% endcomment %}
-                <button class="signup_modal"type="submit" data-toggle="modal" data-target="#exampleModal" >가입하기</button>
-
-							   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">SignUp</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <p>회원가입 </p>
-                      </div>
-                      <div class="modal-footer">
-                        <a href=" {% url 'movies:index' %} " class="btn btn-secondary" data-dismiss="modal" role="button">취소</a>
-                        <a href=" {% url 'accounts:logout' %} " class="btn btn-primary" role="button">로그아웃</a>
-                      </div>
-                    </div>
-                    </div>
-                    </div>
-
-
-							</ul>
-						</form>
+              
+          <form method="post" action="#">
+            {% csrf_token %}
+          <div class="fields">
+            <div class="field">
+            {{ form.as_p }}
+            <ui>
+            <button class="signup_modal"type="submit" data-toggle="modal" data-target="#exampleModal" >가입하기</button>
+          </form>
+            <form action=" {% url 'movies:intro' %} ">
+              <button>돌아가기</button>
+            </form>
+            </ui>
+            </div>
 								{% comment %} <li><a href=" {% url 'accounts:signup' %} " class="button">회원가입</a></li> {% endcomment %}
-                <form action=" {% url 'movies:intro' %} ">
-                  <button>돌아가기</button>
-                </form>
                 {% comment %} <li><a href=" {% url 'movies:intro' %} " class="button">돌아가기</a></li> {% endcomment %}
 						<hr />
         </section>

@@ -5,7 +5,8 @@
 {% block body %}
 
 <h2>{{ article.title }}</h2>
-<p>{{ article.created_at }}</p>
+<p>{{ article.created_at }}</p><hr>
+
 <p>작성자: {{ article.user }}</p>
 
 {% comment %} 좋아요 {% endcomment %}
@@ -24,7 +25,7 @@
 <hr>
 
 {% comment %} 밑에 두면 안보여서 올려둠 {% endcomment %}
-<p>팔로잉 : {{ article.user.followings.all | length }} / 팔로워 : {{ article.user.followers.all | length }}</p>
+<p>팔로잉 : {{ article.user.followings.all | length }} | 팔로워 : {{ article.user.followers.all | length }}</p>
 {% if user != article.user %}
   {% if user in article.user.followers.all %}
   <a href="{% url 'articles:follow' article.pk article.user.pk %}">Unfollow</a>

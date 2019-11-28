@@ -49,15 +49,9 @@
                 </form>
 						<hr />
 
-{% comment %} 비밀번호 잊음 누르면 나가 modal 띄우면서 intro로 튕기기 {% endcomment %}
-          <!-- Button trigger modal -->
-          {% comment %} <a class="modal_message" href=" {% url 'movies:intro' %} " data-toggle="modal" data-target="#exampleModalCenter" role="button">비번?</a> {% endcomment %}
-          {% comment %} <p data-toggle="modal" data-target="#exampleModalCenter">비번?!</p> {% endcomment %}
-          {% comment %} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-            Launch demo modal
-          </button>
+      <a href="{% url 'movies:intro' %}" data-toggle="modal" data-target="#exampleModalCenter">비밀번호를 잊으셨나요?^^ </a>
 
-          <!-- Modal -->
+          <!-- password Modal -->
           <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
@@ -68,26 +62,21 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  ...
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                  응 잘가^^
                 </div>
               </div>
             </div>
-          </div> {% endcomment %}
+          </div>
+          </section>
 
-                  </section>
+        <!-- Footer -->
+          <footer id="footer">
+            <ul class="copyright">
+              <li>&copy; SadHacking </li><li>All rights reserved.</li>
+            </ul>
+          </footer>
 
-                <!-- Footer -->
-                  <footer id="footer">
-                    <ul class="copyright">
-                      <li>&copy; SadHacking </li><li>All rights reserved.</li>
-                    </ul>
-                  </footer>
-
-              </div>
+      </div>
 
   <!-- Scripts -->
     <script>

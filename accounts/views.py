@@ -57,7 +57,7 @@ def logout(request):
 def delete(request):
     if request.user.is_authenticated:
         request.user.delete()
-    return redirect('accounts:index')
+    return redirect('movies:intro')
 
 
 # 로그인이 된 상태라 id 값으로 판별할 필요가 없음 

@@ -3,15 +3,33 @@
 {% block title %}회원 관리 페이지{% endblock title %}
 
 {% block body %}
-{% for user in users %}
-  ID: {{ user.username }} |
-  nickname: {{ user.nickname }} |
-  age: {{ user.age }} |
-  group_id: {{ user.group_id }} | 
-  level: {{ user.level }} |
-  is_staff: {{ user.is_staff }}
-  <br>
-{% endfor %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Nickname</th>
+      <th scope="col">Age</th>
+      <th scope="col">Group</th>
+      <th scope="col">Level</th>
+      <th scope="col">Staff</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <th scope="row">{{ user.id }}</th>
+      <td>{{ user.username }}</td>
+      <td>{{ user.nickname }}</td>
+      <td>{{ user.age }}</td>
+      <td>{{ user.group_id }}</td>
+      <td>{{ user.level }}</td>
+      <td>{{ user.is_staff }}</td>
+    </tr>    
+    {% endfor %}
+  </tbody>
+</table>
   {% comment %} <a href="{% url 'accounts:signup' %}">회원가입</a>
   <a href="{% url 'accounts:login' %}">로그인</a>
   <a href="{% url 'accounts:logout' %}">로그아웃</a> {% endcomment %}

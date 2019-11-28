@@ -22,8 +22,12 @@ def index(request):
 
 @login_required
 def movielevellist(request):
-    level = request.user.level 
-    movies = Movie.objects.filter(level=level)
+    # 운영자면 모든 영화가 나옵니다
+    if request.user.is_staff:
+        movies = Movie.objects.all()
+    else: 
+        level = request.user.level 
+        movies = Movie.objects.filter(level=level)
     context = {'movies': movies}
     return render(request, 'movies/movielevellist.html', context)
 
@@ -174,8 +178,9 @@ def addmovie(request):
                 movie.directors = directors[:-1]
                 actors = item['actor'] 
                 movie.actors = actors[:-1]
-                poster_url = item['image']
-                movie.poster_url = poster_url
+                # 썸네일 가져오기
+                # poster_url = item['image']
+                # movie.poster_url = poster_url
 
                 story_URL  = item['link']
                 response = requests.get(story_URL)
@@ -184,6 +189,8 @@ def addmovie(request):
                 # 태그는 알아서 처리됨 
                 description = soup.find('p', class_='con_tx').get_text()
                 movie.description = description
+                # 고화질 파일 가져오기 
+                movie.poster_url = soup.select('div.poster > a > img')[0]['src'][:-15]
  
         url = 'https://www.googleapis.com/youtube/v3/search'
         params = {
@@ -228,6 +235,15 @@ def savemovie(request):
             form.save()
             return redirect('movies:index')
     return render(request, 'movies/addmovie.html', context)
+
+
+# 영화 수정 삭제용
+# def updatemovie(request, movie_pk):
+#     pass
+
+
+# def deletemovie(request, movie_pk):
+#     pass
 
 
 def recommendation(request):

@@ -14,7 +14,8 @@
     {% for movie in movies %}
 								<article class="style1">
 									<span class="image">
-										<img src="{% static 'movies/images/base/pic01.jpg' %}" alt="" />
+										<img src="{{ movie.poster_url }}" alt="" />
+                    
 									</span>
 									<a href="generic.html">
 										<a href="{% url 'movies:detail' movie.pk %}"><h2>{{ movie.title }}</h2></a>

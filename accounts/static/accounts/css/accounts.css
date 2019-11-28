@@ -103,8 +103,7 @@
 	body {
 		height: 100%;
 		background-color: #414f57;
-		/* 경로문제 */
-		background-image: url("../images/accounts.jpg"), -moz-linear-gradient(60deg, rgba(35, 59, 40, 0.5) 10%, rgba(14, 124, 47, 0.411)), url("../images/LinearGradient.png");
+		background-image: url("../images/accounts.jpg"), -moz-linear-gradient(60deg, rgba(35, 59, 40, 0.5) 10%, rgba(14, 124, 47, 0.411)), url("../images/LinearGradient.png"), -webkit-filter(blur(3px));
 		background-image: url("../images/accounts.jpg"), -webkit-linear-gradient(60deg, rgba(35, 59, 40, 0.5) 10%, rgba(14, 124, 47, 0.411)), url("../images/LinearGradient.png");
 		background-image: url("../images/accounts.jpg"), -ms-linear-gradient(60deg, rgba(35, 59, 40, 0.5) 5%, rgba(14, 124, 47, 0.411)), url("../images/LinearGradient.png");
 		background-image: url("../images/accounts.jpg"), linear-gradient(60deg, rgba(35, 59, 40, 0.5) 10%, rgba(14, 124, 47, 0.411)), url("../images/LinearGradient.png");
@@ -115,7 +114,7 @@
 		left: 0;
 		opacity: 1;
     background-attachment: fixed,			fixed,				fixed;
-		top: 0;
+    top: 0;
 	}
 
 		body:after {
@@ -129,10 +128,10 @@
 			opacity: 0;
 			z-index: 1;
 			background-color: #414f57;
-			background-image: url("../images/overlay.png"), -moz-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
-			background-image: url("../images/overlay.png"), -webkit-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
-			background-image: url("../images/overlay.png"), -ms-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
-			background-image: url("../images/overlay.png"), linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
+			background-image: url("../images/overlay.png"), -moz-linear-gradient(60deg, rgba(56, 124, 39, 0.5) 5%, rgba(0, 228, 255, 0.35));
+			background-image: url("../images/overlay.png"), -webkit-linear-gradient(60deg, rgba(56, 124, 39, 0.5) 5%, rgba(0, 228, 255, 0.35));
+			background-image: url("../images/overlay.png"), -ms-linear-gradient(60deg, rgba(56, 124, 39, 0.5) 5%, rgba(0, 228, 255, 0.35));
+			background-image: url("../images/overlay.png"), linear-gradient(60deg, rgba(56, 124, 39, 0.5) 5%, rgba(0, 228, 255, 0.35));
 			background-repeat: repeat,			no-repeat;
 			background-size: 100px 100px, cover;
 			background-position: top left,		center center;
@@ -191,7 +190,7 @@
 		}
 
 		a:hover {
-			color: #1e8a4b;
+			color: #1e8a1e;
 		}
 
 	strong, b {
@@ -385,7 +384,7 @@
 		input[type="tel"]:focus,
 		select:focus,
 		textarea:focus {
-			border-color: #1e8a4b;
+			border-color: #1e8a1e;
 		}
 
 	select {
@@ -481,13 +480,13 @@
 
 		input[type="checkbox"]:checked + label:before,
 		input[type="radio"]:checked + label:before {
-			color: #1e8a4b;
+			color: #1e8a1e;
 			content: '\f00c';
 		}
 
 		input[type="checkbox"]:focus + label:before,
 		input[type="radio"]:focus + label:before {
-			border-color: #1e8a4b;
+			border-color: #1e8a1e;
 		}
 
 	input[type="checkbox"] + label:before {
@@ -775,7 +774,7 @@
 				}
 
 				ul.icons li a:hover:before {
-					text-shadow: 1.25px 0px 0px #1e8a4b, -1.25px 0px 0px #1e8a4b, 0px 1.25px 0px #1e8a4b, 0px -1.25px 0px #1e8a4b;
+					text-shadow: 1.25px 0px 0px #1e8a1e, -1.25px 0px 0px #1e8a1e, 0px 1.25px 0px #1e8a1e, 0px -1.25px 0px #1e8a1e;
 				}
 
 				ul.icons li a:before {
@@ -791,7 +790,7 @@
 				}
 
 				ul.icons li a:hover {
-					border-color: #1e8a4b;
+					border-color: #1e8a1e;
 				}
 
 		@media screen and (max-width: 480px) {
@@ -909,7 +908,7 @@
 		-ms-transition: opacity 1s ease, -ms-transform 1s ease;
 		transition: opacity 1s ease, transform 1s ease;
 		padding: 4.5em 3em 3em 3em ;
-		background: darkseagreen;
+		background: rgba(229, 233, 229, 0.746);
 		border-radius: 4px;
 		cursor: default;
 		max-width: 100%;
@@ -929,7 +928,7 @@
 				display: block;
 				margin: 0 auto;
 				border-radius: 100%;
-				box-shadow: 0 0 0 1.5em #ffffff;
+				box-shadow: 0 0 0 1.5em #545c5742;
 			}
 
 			#main .avatar:before {

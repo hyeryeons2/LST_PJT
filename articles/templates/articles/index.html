@@ -16,17 +16,27 @@
 <hr>
 
 {% comment %} 글 목록 {% endcomment %}
-<hr>
-{% for article in articles  %}
-<div>
-  {% comment %} is_staff 일때만 strong tag {% endcomment %}
-  {% if article.user.is_staff %}
-  <strong>{{ article.pk }}. {{ article.title }} by {{ article.user }}</strong>
-  {% else %}
-  <h3>{{ article.pk }}. {{ article.title }} by {{ article.user }}</h3>
-  {% endif %} 
-  <a href="{% url 'articles:detail' article.pk %}">[Detail]</a>
-</div>
-<br>
-{% endfor %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">User</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for article in articles %}
+    <tr>
+      <th scope="row">{{ article.id }}</th>
+      <td><a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></td>
+    {% if article.user.is_staff  %}
+      <td><strong>{{ article.user }}</strong></td>
+    {% else %}
+      <td>{{ article.user }}</td>
+    {% endif %}
+    </tr>    
+    {% endfor %}
+  </tbody>
+</table>
+
 {% endblock body %}

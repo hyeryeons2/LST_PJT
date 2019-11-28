@@ -69,9 +69,12 @@
             <a class="logout_modal btn btn-light" href=" {% url 'accounts:logout' %}" data-toggle="modal" data-target="#exampleModal" role="button" >로그아웃</a><br>
 	
 						{% comment %} 영화등록 {% endcomment %}
-						<form action="{% url 'movies:addmovie' %}">
-						<button class="btn btn-light">영화등록</button>
-						</form>
+            {% comment %} 스태프한테만 버튼 보임 {% endcomment %}
+            {% if user.is_staff %}
+              <form action="{% url 'movies:addmovie' %}">
+              <button class="btn btn-light">영화등록</button>
+              </form>            
+            {% endif %}
 					</nav>
 
 				<!-- Main -->

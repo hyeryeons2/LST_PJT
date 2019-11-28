@@ -19,6 +19,12 @@
   {{ movie.genres }}
   {{ movie.open_dt }}
   <hr>
+
+  {% comment %} 영화 수정 삭제용 {% endcomment %}
+  {% comment %} {% if user.is_staff %}
+    <a href=""></a>
+    <a href=""></a>
+  {% endif %} {% endcomment %}
   
   {% comment %} 추천한 사람 나오는 곳 {% endcomment %}
   {% if movie.recommendation %}

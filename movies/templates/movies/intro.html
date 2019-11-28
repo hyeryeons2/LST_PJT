@@ -5,8 +5,11 @@
 		<title>Landing Page</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
 		<link rel="stylesheet" href="{% static 'movies/css/intro.css' %}" />
 		<noscript><link rel="stylesheet" href="{% static 'movies/css/intro2.css' %}" /></noscript>
+
+		<link rel="shortcut icon" href="{% static 'movies/images/favicon.png' %}" type="image/x-icon">
 	</head>
 
 	<body class="is-preload">
@@ -19,7 +22,7 @@
 					<header id="header">
 						<h1>Welcome</h1>
 						<p>
-						<a href=" {% url 'accounts:login' %}  ">로그인</a>
+						<a href=" {% url 'accounts:login' %} ">로그인</a>
 						 &nbsp;&bull;&nbsp; <a href=" {% url 'accounts:signup' %} ">회원가입</a></p>
 					</header>
 

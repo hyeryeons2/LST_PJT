@@ -4,11 +4,13 @@
 
 {% block body %}
 <header><h1>자유게시판</h1></header>
-<p class="alert alert-dark" role="alert">** 회원들과 다양한 정보를 공유해 보세요!</p>
+<p class="alert alert-dark" role="alert"><strong>** 회원들과 다양한 정보를 공유해 보세요!</strong></p>
 
 {% comment %} 로그인 확인 {% endcomment %}
 {% if user.is_authenticated %}
-<a href="{% url 'articles:create' %}" style="color:yellowgreen;" role="button">[글 작성하기]</a>
+<div style="text-align:right">
+<a href="{% url 'articles:create' %}" class="btn btn-outline-light" style="color:yellowgreen; " role="button">글 작성하기</a>
+</div>
 {% else %}
 <p>회원만 글을 작성할 수 있습니다!</p>
 <a href="{% url 'accounts:signup' %}">회원이 아니신가요?</a>
@@ -19,20 +21,20 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">User</th>
+      <th scope="col" style="color:yellowgreen" >#</th>
+      <th scope="col" style="color:yellowgreen">Title</th>
+      <th scope="col" style="color:yellowgreen">User</th>
     </tr>
   </thead>
   <tbody>
     {% for article in articles %}
     <tr>
-      <th scope="row">{{ article.id }}</th>
-      <td><a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></td>
+      <th scope="row" style="color:white">{{ article.id }}</th>
+      <td><a href="{% url 'articles:detail' article.pk %}" style="color:white" >{{ article.title }}</a></td>
     {% if article.user.is_staff  %}
-      <td><strong>{{ article.user }}</strong></td>
+      <td style="color:white"><strong>{{ article.user }}</strong> <span class="badge badge-success">lv.{{ article.user.level }}</span></td>
     {% else %}
-      <td>{{ article.user }}</td>
+      <td style="color:white">{{ article.user }} <span class="badge badge-success">lv.{{ article.user.level }}</span></td>
     {% endif %}
     </tr>    
     {% endfor %}

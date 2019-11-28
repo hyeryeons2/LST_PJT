@@ -28,7 +28,7 @@
 	<body class="is-preload">
 
 		{% comment %} BGM 재생 {% endcomment %}
-		{% comment %} <iframe src="{% static 'movies/audio/soundtrack1.mp3' %}" allow="autoplay" id="audio" style="display:none"></iframe> {% endcomment %}
+		<iframe src="{% static 'movies/audio/soundtrack1.mp3' %}" allow="autoplay" id="audio" style="display:none"></iframe>
 		{% comment %} <audio id="audio" autoplay>
 		<source src="={% static 'movies/audio/silence.mp3' %}">
 		</audio> {% endcomment %}
@@ -45,7 +45,7 @@
 								<a href="{% url 'movies:index' %}" class="logo">
 									<span class="symbol"><img src=" {% static 'movies/images/favicon.png' %} " alt="ghost"></span><span class="title">Z:omBie | 좀비영화추천사이트</span>
 								</a>
-                
+
 							<!-- Nav -->
 								<nav>
 									<ul>
@@ -59,7 +59,7 @@
 				<!-- Menu -->
 					<nav id="menu">
 						<p>'{{ user.username }}' 님, 반갑습니다 :)<br>
-						<h2>Menu</h2><hr>
+						<h2 style="color:yellowgreen">Menu</h2><hr>
 						<ul>
 							<li><a href=" {% url 'movies:index' %} ">Home</a></li>
               {% if user.is_staff %}
@@ -67,15 +67,13 @@
               {% endif %}
 							<li><a href="{% url 'movies:movielevellist' %}">영화목록조회</a></li>
 							<li><a href=" {% url 'articles:index' %} ">자유게시판<span class="badge badge-success" style="margin-left:10px">New</span></a></li>
-							
 						</ul>
 						<hr>
 
 
 	          {% if not user.is_staff %}
 						<p><a class="btn btn-outline-light" href=" {% url 'accounts:update' %}" role="button" >내 정보 수정</a></p>
-						{% comment %} 로그아웃 {% endcomment %}
-						<p><a class="logout_modal btn btn-light" href=" {% url 'accounts:logout' %}" data-toggle="modal" data-target="#exampleModal" role="button" >로그아웃</a></p>
+						<p><a class="btn btn-outline-light" href=" {% url 'accounts:logout' %}" data-toggle="modal" data-target="#exampleModal" role="button" >로그아웃</a></p>
 						<p><a class="btn btn-outline-light" href=" {% url 'accounts:delete' %}" role="button" >탈퇴하기</a></p>
 
             {% comment %} admin한테만 영화 등록 버튼 보임 {% endcomment %}

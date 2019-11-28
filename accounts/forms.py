@@ -20,7 +20,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
 class CustomUserChangeForm(UserChangeForm):
     password = ReadOnlyPasswordHashField(
         label='Password',
-        help_text='<a href=\"password/\">여기서 변경</a>.'
+        help_text='<a href=\"password/\" style="font-weight:bold; text-decoration:underline; color:green">여기서 변경</a>.'
     )
 
     class Meta:

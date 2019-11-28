@@ -3,13 +3,16 @@
 {% block title %}Article::Detail{% endblock title %}
 
 {% block body %}
+<hr>
+<h1>{{ article.title }}</h1>
 
-<h2>{{ article.title }}</h2>
-<p>{{ article.created_at }}</p><hr>
-
-<p>작성자: {{ article.user }}</p>
+<div>
+<div style="text-align:right">
+<p> <i class="fas fa-pastafarianism"></i> <span style="color:yellowgreen">{{ article.user.nickname }}</span> |  {{ article.created_at }}</p>
+</div>
 
 {% comment %} 좋아요 {% endcomment %}
+<div style="text-align:right">
 <p>
   <i 
     class="{% if user in article.liked_users.all %}fas{% else %}far{% endif %} fa-heart fa-lg" 
@@ -18,33 +21,40 @@
     style="color: yellowgreen"
   >
   </i>
-  <span id="like-count">{{ article.liked_users.all | length }}</span>명이 이 글을 좋아합니다.
+  <span id="like-count">{{ article.liked_users.all | length }}</span>
 </p>
-<hr>
-<p>{{ article.content }}</p>
-<hr>
-
-{% comment %} 밑에 두면 안보여서 올려둠 {% endcomment %}
-<p>팔로잉 : {{ article.user.followings.all | length }} | 팔로워 : {{ article.user.followers.all | length }}</p>
 {% if user != article.user %}
   {% if user in article.user.followers.all %}
-  <a href="{% url 'articles:follow' article.pk article.user.pk %}">Unfollow</a>
+  <a class="btn btn-outline-light" href="{% url 'articles:follow' article.pk article.user.pk %}" role="button">Unfollow</a>
+  {% comment %} <a href="{% url 'articles:follow' article.pk article.user.pk %}">Unfollow</a> {% endcomment %}
   {% else %}
-  <a href="{% url 'articles:follow' article.pk article.user.pk %}">Follow</a>
+  <a class="btn btn-outline-light" href="{% url 'articles:follow' article.pk article.user.pk %}" role="button">Follow</a>
+  {% comment %} <a href="{% url 'articles:follow' article.pk article.user.pk %}">Follow</a> {% endcomment %}
   {% endif %} 
 {% endif %}
+{% comment %} 밑에 두면 안보여서 올려둠 {% endcomment %}
+<p style="margin-top:10px">[팔로잉 : {{ article.user.followings.all | length }}  | 팔로워 : {{ article.user.followers.all | length }} ]</p>
+</div>
+<hr>
+{% comment %} <p style="background-color:white">{{ article.content }}</p> {% endcomment %}
 <hr>
 
 {% comment %} 작성자면 수정, 삭제 가능 {% endcomment %}
+<div style="text-align:right">
 {% if article.user == request.user %}
-<a href="{% url 'articles:update' article.pk %}">[Update]</a>
+<form action="{% url 'articles:update' article.pk %}">
+<button class="btn btn-outline-light btn-sm text-light">글수정하기</button>
+</form>
+{% comment %} <a class="btn btn-outline-light" href="{% url 'articles:update' article.pk %}" role="button">수정하기</a> {% endcomment %}
 <form action="{% url 'articles:delete' article.pk %}" method="POST">
   {% csrf_token %}
-  <button type="submit">Delete</button>
+  <button class="btn btn-outline-light btn-sm text-light" type="submit">글삭제하기</button>
 </form>
+</div>
 <hr>
 {% endif %}
 
+{% comment %} 코멘트 {% endcomment %}
 {% for comment in comments %}
 
 {% comment %} 댓글 수정 {% endcomment %}
@@ -52,33 +62,37 @@
   <form action="{% url 'articles:comment_update' comment.pk %}" method="POST">
     {% csrf_token %}
     {{ updateform.as_p }}
-    <button type="submit">[수정]</button>
+    <button class="btn btn-outline-light btn-sm text-light" type="submit">댓글수정</button>
   </form>
 {% else %}
 
   {% comment %} 비밀댓글 처리 {% endcomment %}
   {% if comment.secret %}
     {% if comment.user == request.user or article.user == request.user %}
-    <span>{{ comment.pk }}. {{ comment.content }} by {{ comment.user }}</span>
+ <span>[{{ comment.user }}] {{ comment.content }}</span>
     {% else %}
     <span>비밀 댓글입니다.</span>
     {% endif %}
   {% else %}
-  <span>{{ comment.pk }}. {{ comment.content }} by {{ comment.user }}</span>
+  <span>[{{ comment.user }}] {{ comment.content }} | {{ comment.created_at }}</span><br>
   {% endif %}<br>
 
   {% comment %} 글 작성자와 댓글 작성자만 댓글 삭제 가능 {% endcomment %}
   {% if comment.user == request.user or article.user == request.user %}
+  <div style="text-align:right">
   <form action="{% url 'articles:comment_delete' comment.pk %}", method="POST">
     {% csrf_token %}
-    <button type="submit">Comment Delete</button>
+    <button class="btn btn-outline-light btn-sm text-light" type="submit">댓글삭제</button>
   </form>
+  </div>
   {% endif %}
 
   {% comment %} 글 작성자만 수정 가능 {% endcomment %}
   {% if comment.user == request.user %}
   <form action="{% url 'articles:comment_update' comment.pk %}">
-    <button type="submit">[수정하기]</button>
+  <div style="text-align:right">
+    <button class="btn btn-outline-light btn-sm text-light" type="submit">댓글수정</button>
+  </div>
   </form>
   <hr>
   {% endif %}
@@ -92,8 +106,15 @@
 <form action="{% url 'articles:comment_create' article.pk %}", method="POST">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">Comment Create</button>
+  <div style="text-align:right"> 
+  <button class="btn btn-outline-light btn-sm text-light" type="submit">댓글작성</button>
+  </div>
 </form>
+<br>
+  <div style="text-align:center"> 
+  <a class="btn btn-outline-light" href=" {% url 'movies:index' %} " role="button">홈으로</a> 
+  </div>
+  {% comment %} <button class="btn btn-outline-light btn-sm text-light" type="submit">홈으로</button> {% endcomment %}
 {% endif %}
 
 {% comment %} 좋아요 javascript {% endcomment %}

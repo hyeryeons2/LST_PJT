@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %}영화 말해봐{% endblock title %}
+{% block title %}Movies:Recommendation{% endblock title %}
 
 {% block body %}
+<header>
+<h1>없는 영화 추천하기</h1>
+<p>나만 알고 있는 좀비영화가 있다면 추천해 주세요!</p>
+</header>
+<hr>
+<div style="text-align:center">
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">작성하기</button>
+  <button type="submit" class="btn btn-outline-light">신청하기</button>
 </form>
+</div>
 {% endblock body %}

@@ -4,16 +4,20 @@
 
 {% block body %}
 
+<header>
+<h1>회원목록</h1>
+</header>
+
 <table class="table">
   <thead>
     <tr class="text-light">
-      <th scope="col">#</th>
-      <th scope="col">ID</th>
-      <th scope="col">Nickname</th>
-      <th scope="col">Age</th>
-      <th scope="col">Group</th>
-      <th scope="col">Level</th>
-      <th scope="col">Staff</th>
+      <th scope="col" style="color:yellowgreen">#</th>
+      <th scope="col" style="color:yellowgreen">ID</th>
+      <th scope="col" style="color:yellowgreen">Nickname</th>
+      <th scope="col" style="color:yellowgreen">Age</th>
+      <th scope="col" style="color:yellowgreen">Group</th>
+      <th scope="col" style="color:yellowgreen">Level</th>
+      <th scope="col" style="color:yellowgreen">Is_Staff</th>
     </tr>
   </thead>
   <tbody>
@@ -30,6 +34,10 @@
     {% endfor %}
   </tbody>
 </table>
+
+<div style="text-align:center">
+<a class="btn btn-outline-light" href=" {% url 'movies:index' %} " role="button">메인페이지</a>
+</div>
   {% comment %} <a href="{% url 'accounts:signup' %}">회원가입</a>
   <a href="{% url 'accounts:login' %}">로그인</a>
   <a href="{% url 'accounts:logout' %}">로그아웃</a> {% endcomment %}

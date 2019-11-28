@@ -6,6 +6,7 @@
 <form method="POST">
   {% csrf_token %}
   {{form.as_p}}
-  <button type="submit">Update</button>
+  <button class="btn btn-outline-light" type="submit">Update</button>
+  {% comment %} <button type="submit">Update</button> {% endcomment %}
 </form>
 {% endblock body %}

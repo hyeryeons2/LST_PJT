@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}AddMovie{% endblock title %}
+{% block title %}Movies:AddMovie{% endblock title %}
 
 {% block body %}
-<h2>영화 추가</h2>
+<header>
+<h1>신규 영화 추가</h1>
+</header>
+
 <form method="POST" class="form-inline my-2 my-lg-0">
   {% csrf_token %}
   {% comment %} get 할 때 name 으로 받음 {% endcomment %}

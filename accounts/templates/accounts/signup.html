@@ -22,7 +22,7 @@
   {% comment %} templates {% endcomment %}
   <link rel="stylesheet" href="{% static 'accounts/css/accounts.css' %}" />
   <noscript><link rel="stylesheet" href="{% static 'accounts/css/accounts2.css' %}" /></noscript>
-
+  <link rel="shortcut icon" href="{% static 'movies/images/favicon.png' %}" type="image/x-icon">
 </head>
 <body class="is-preload">
   <!-- Wrapper -->
@@ -39,26 +39,28 @@
               
           <form method="post" action="#">
             {% csrf_token %}
-          <div class="fields">
-            <div class="field">
-            {{ form.as_p }}
-            <ui>
-            <button class="signup_modal"type="submit" data-toggle="modal" data-target="#exampleModal" >가입하기</button>
-          </form>
-            <form action=" {% url 'movies:intro' %} ">
-              <button>돌아가기</button>
-            </form>
-            </ui>
-            </div>
-								{% comment %} <li><a href=" {% url 'accounts:signup' %} " class="button">회원가입</a></li> {% endcomment %}
-                {% comment %} <li><a href=" {% url 'movies:intro' %} " class="button">돌아가기</a></li> {% endcomment %}
+							<div class="fields">
+								<div class="field">
+                {{ form.as_p }}
+								</div>
+							</div>
+							<ul class="actions special">
+								<li><button class="button" type="submit">가입</a></li>
+                <li><a href=" {% url 'movies:intro' %} " class="button" role="button">취소</a></li>              
+              
+                {% comment %} <button type="submit" >가입하기</button> {% endcomment %}
+              </ul>
+						</form>
+                {% comment %} <form action=" {% url 'movies:intro' %} ">
+                  <button>가입취소</button>
+                </form> {% endcomment %}
 						<hr />
         </section>
 
       <!-- Footer -->
         <footer id="footer">
           <ul class="copyright">
-            <li>&copy; SadHacking </li><li>Designed by: Haily Kim </li>
+            <li>&copy; SadHacking </li><li>All rights reserved.</li>
           </ul>
         </footer>
 

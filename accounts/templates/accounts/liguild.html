@@ -3,6 +3,8 @@
 {% block title %}Accounts::GuildList{% endblock title %}
 
 {% block body %}
+<link rel="shortcut icon" href="{% static 'movies/images/favicon.png' %}" type="image/x-icon">
+
 <h2>길드목록현황</h2>
  {% for guild in guilds %}
     {{ guild.name }}

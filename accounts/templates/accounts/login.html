@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Log in</title>
 
+  <link rel="shortcut icon" href="{% static 'movies/images/favicon.png' %}" type="image/x-icon">
   {% comment %} bootstrap CDN {% endcomment %}
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -21,6 +22,7 @@
 
 </head>
 <body class="is-preload">
+
   <!-- Wrapper -->
     <div id="wrapper">
 
@@ -41,12 +43,14 @@
 								</div>
 							</div>
 							<ul class="actions special">
-                <button type="submit" >로그인</button>
+                {% comment %} <button type="submit" >로그인</button> {% endcomment %}
+								<li><button class="button" type="submit">로그인</a></li>
+                <li><a href=" {% url 'movies:intro' %} " class="button" role="button">취소</a></li>              
               </ul>
-						</form>
+						{% comment %} </form>
                 <form action=" {% url 'movies:intro' %} ">
                   <button>돌아가기</button>
-                </form>
+                </form> {% endcomment %}
 						<hr />
 
       <a href="{% url 'movies:intro' %}" data-toggle="modal" data-target="#exampleModalCenter">비밀번호를 잊으셨나요?^^ </a>

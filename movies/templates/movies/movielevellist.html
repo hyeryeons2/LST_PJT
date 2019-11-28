@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Movie List{% endblock title %}
+{% block title %}Movies:MovieList{% endblock title %}
 
 {% block body %}
-
+<header>
+<h1>영화추천</h1>
+<p>회원 레벨에 맞는 영화를 추천해 드립니다! </p>
+<p>당신은 현재 {{ user.level }} 레벨 입니다! </p>
+</header><hr>
   {% comment %} 영화 등록 요청 링크 {% endcomment %}
-  <a href="{% url 'movies:recommendation' %}">영화 등록 요청하기</a>
-
+	<div style="text-align:right">
+  <a href="{% url 'movies:recommendation' %}" class="btn btn-outline-light" >없는 영화 요청하기</a>
+</div>
 		<section class="tiles">
     {% for movie in movies %}
 								<article class="style1">

@@ -62,7 +62,7 @@
 							{% comment %} 여기에서 레벨, 비번, 닉넴수정 가능 {% endcomment %}
 							<li><a href="{% url 'accounts:update' %}">내정보조회</a></li>
 							<li><a href="{% url 'movies:movielevellist' %}">영화조회</a></li>
-							<li><a href="#">자유게시판</a></li>
+							<li><a href=" {% url 'articles:index' %} ">자유게시판</a></li>
 						</ul><hr>
 
 						{% comment %} 로그아웃 {% endcomment %}
@@ -94,7 +94,7 @@
 					<footer id="footer">
 						<div class="inner">
 							<ul class="copyright">
-								<li>&copy; Untitled. All rights reserved</li>
+								<li>&copy;  2019-2119 SadHacking Company All rights reserved.</li>
 							</ul>
 						</div>
 					</footer>

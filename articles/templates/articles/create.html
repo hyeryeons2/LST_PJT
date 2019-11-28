@@ -8,16 +8,16 @@
 <p class="alert alert-dark" role="alert">** 무분별한 도배 및 불법 게시글은 가차없이 강퇴됨을 미리 언급 드립니다</p>
 <hr>
 
-<div class="card text-center border-light bg-muted">
-  <div class="card-header text-light" >
+<div class="card border-light bg-light">
+  <div class="card-header text-dark" >
     새로운 글 작성
   </div>
-  <div class="card-body">
-    <p class="card-text">
+  <div class="card-body text-dark">
+    <p class="card-text text-dark">
     <form method="POST">
       {% csrf_token %}
       {{form.as_p}}
-      <button class="btn btn-outline-light" type="submit">작성완료</button>
+      <button class="btn btn-outline-light " type="submit">작성완료</button>
     </form>
     </p>
   </div>

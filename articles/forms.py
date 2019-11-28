@@ -15,6 +15,10 @@ class CommentForm(forms.ModelForm):
         label='댓글',
     )
 
+    # secret = forms.BooleanField(
+    #     label='비밀!',
+    # )
+
     class Meta:
         model = Comment
-        fields = ['content', 'secret' ]
+        fields = ['content', ]

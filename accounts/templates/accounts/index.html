@@ -1,24 +1,22 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>UserList</title>
+{% extends 'base.html' %}
 
-  {% comment %} bootstrap {% endcomment %}
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-<body>
-  {% comment %} <img src="../static/accounts/images/accounts.jpg" alt="account"> {% endcomment %}
-  <a href="{% url 'accounts:signup' %}">회원가입</a>
+{% block title %}회원 관리 페이지{% endblock title %}
+
+{% block body %}
+{% for user in users %}
+  ID: {{ user.username }} |
+  nickname: {{ user.nickname }} |
+  age: {{ user.age }} |
+  group_id: {{ user.group_id }} | 
+  level: {{ user.level }} |
+  is_staff: {{ user.is_staff }}
+  <br>
+{% endfor %}
+  {% comment %} <a href="{% url 'accounts:signup' %}">회원가입</a>
   <a href="{% url 'accounts:login' %}">로그인</a>
-  <a href="{% url 'accounts:logout' %}">로그아웃</a>
+  <a href="{% url 'accounts:logout' %}">로그아웃</a> {% endcomment %}
   <a href="{% url 'accounts:delete' %}">삭제</a>
   <a href="{% url 'accounts:update' %}">수정</a>
   <a href="{% url 'accounts:password' %}">비밀번호 수정</a>
   <a href="{% url 'accounts:liguild' %}">길드목록보기</a>
-</body>
-</html>
+{% endblock body %}

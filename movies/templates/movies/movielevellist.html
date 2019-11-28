@@ -4,11 +4,6 @@
 {% block title %}Movie List{% endblock title %}
 
 {% block body %}
-<h1>헤더 처리용</h1>
-
-{% for movie in movies %}
-<a href="{% url 'movies:detail' movie.pk %}">{{ movie.title }}</a>
-{% endfor %}
 
 		<section class="tiles">
     {% for movie in movies %}

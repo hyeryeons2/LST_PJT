@@ -5,11 +5,13 @@ from django.contrib.auth import login as auth_login, logout as auth_logout, upda
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from .forms import CustomUserChangeForm, CustomUserCreationForm, CustomPasswordChangeForm, GuildForm
-from .models import Guild
+from .models import Guild, User
 
 
 def index(request):
-    return render(request, 'accounts/index.html')
+    users = User.objects.all()
+    context = {'users': users}
+    return render(request, 'accounts/index.html', context)
 
 # request.user.username
 def signup(request):
@@ -21,7 +23,7 @@ def signup(request):
             user = form.save()
             # return redirect('accounts:login')
             auth_login(request, user)
-            return redirect('accounts:index')
+            return redirect('movies:index')
     else: # == 'GET'
         form = CustomUserCreationForm()
     context = {'form': form}
@@ -65,7 +67,7 @@ def update(request):
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('accounts:index')
+            return redirect('movies:index')
     else:
         form = CustomUserChangeForm(instance=request.user)
     context = {'form': form}
@@ -81,7 +83,7 @@ def password(request):
             # 재로그인?
             # 비밀번호가 바뀌면 세션 정보가 일치하지 않게 되서 로그아웃됨 
             update_session_auth_hash(request, user)
-            return redirect('accounts:index')
+            return redirect('movies:index')
     else:
         # 비밀번호 변경 form이 필요
         form = CustomPasswordChangeForm(request.user) 

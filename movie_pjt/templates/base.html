@@ -60,7 +60,11 @@
 						<ul>
 							<li><a href=" {% url 'movies:index' %} ">Home</a></li>
 							{% comment %} 여기에서 레벨, 비번, 닉넴수정 가능 {% endcomment %}
-							<li><a href="{% url 'accounts:update' %}">내정보조회</a></li>
+              {% if user.is_staff %}
+              <li><a href="{% url 'accounts:index' %}">회원정보조회</a></li>
+              {% else %}
+              <li><a href="{% url 'accounts:update' %}">내정보조회</a></li>
+              {% endif %}
 							<li><a href="{% url 'movies:movielevellist' %}">영화조회</a></li>
 							<li><a href=" {% url 'articles:index' %} ">자유게시판</a></li>
 						</ul><hr>

@@ -60,6 +60,7 @@ def like(request, movie_pk):
         'count': movie.liked_users.count()
     }
     return redirect('movies:detail', movie_pk)
+    # return JsonResponse(context)
 
 
 @require_POST
@@ -75,6 +76,7 @@ def reviews(request, movie_pk):
     return redirect('movies:detail', movie_pk)
 
 
+@login_required
 def reviewupdate(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     movie_pk = review.movie_id
@@ -113,6 +115,7 @@ def reviewdelete(request, review_pk):
 
 
 # 혹시 값이 이상하면 수동으로 하세요
+@login_required
 def addmovie(request):
     form =  MovieForm()
     if request.method == 'POST':
@@ -228,13 +231,15 @@ def addmovie(request):
     return render(request, 'movies/addmovie.html', context) 
     
 
+@require_POST
 def savemovie(request):
     if request.method == 'POST':
         form = MovieForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('movies:index')
-    return render(request, 'movies/addmovie.html', context)
+        context = {'form': form}
+        return render(request, 'movies/addmovie.html', context)
 
 
 # 영화 수정 삭제용
@@ -246,6 +251,7 @@ def savemovie(request):
 #     pass
 
 
+@login_required
 def recommendation(request):
     if request.method == 'POST':
         form = RecommendationForm(request.POST)
@@ -259,6 +265,7 @@ def recommendation(request):
     return render(request, 'movies/recommendation.html', context)
 
 
+@login_required
 def recommendlist(request):
     recommends = Recommendation.objects.all()
     context = {'recommends': recommends}

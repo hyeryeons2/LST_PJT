@@ -14,7 +14,7 @@
     class="{% if user in article.liked_users.all %}fas{% else %}far{% endif %} fa-heart fa-lg" 
     id="like-btn" 
     data-id="{{ article.pk }}" 
-    style="color: red"
+    style="color: yellowgreen"
   >
   </i>
   <span id="like-count">{{ article.liked_users.all | length }}</span>명이 이 글을 좋아합니다.

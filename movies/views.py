@@ -55,6 +55,13 @@ def like(request, movie_pk):
     else:
         user.liked_movies.add(movie)
         liked = True
+    if len(user.liked_movies.all()) == 0:
+        user.level = 1
+    elif len(user.liked_movies.all()) == 1:
+        user.level = 2
+    else:
+        user.level = 3
+    user.save()
     context = {
         'liked': liked, 
         'count': movie.liked_users.count()

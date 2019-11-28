@@ -5,6 +5,9 @@
 
 {% block body %}
 
+  {% comment %} 영화 등록 요청 링크 {% endcomment %}
+  <a href="{% url 'movies:recommendation' %}">영화 등록 요청하기</a>
+
 		<section class="tiles">
     {% for movie in movies %}
 								<article class="style1">
